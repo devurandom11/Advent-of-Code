@@ -3,25 +3,20 @@ const fs = require("fs");
 // Solution 2
 const calcRibbonLength = (input) => {
   // Map input to array of packages
-  let result = 0;
   const inputArray = input
     .split("\n")
     .map((string) => string.split("x").map(Number));
 
-  // Sort package dimensions
-  inputArray.forEach((element) => {
-    element.sort((a, b) => a - b).map(Number);
-    const length = element[0];
-    const width = element[1];
-    const height = element[2];
-    const ribbonLength = length * 2 + width * 2;
+  // Calculate total ribbon length needed
+  return inputArray.reduce((total, [length, width, height]) => {
+    const smallestPerimeter = Math.min(
+      2 * (length + width),
+      2 * (width + height),
+      2 * (height + length)
+    );
     const bowLength = length * width * height;
-
-    // Calculate running total
-    result += Number(ribbonLength + bowLength);
-  });
-
-  return result;
+    return total + (smallestPerimeter + bowLength);
+  }, 0);
 };
 
 // Solve
