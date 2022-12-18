@@ -18,7 +18,8 @@ do
         cd part-2
         [ ! -f "main.js" ] && touch {main.js,input.txt} || echo "Files already exist..."
         cd ../
-        git commit -am "Create skeleton for AoC ${year}${day}" && echo "Git commit success" || echo "FAILURE!!!"
+        git add -A &&
+        git commit -am "Create skeleton for AoC ${year}${day}" &&
         cd ../
     done
     
