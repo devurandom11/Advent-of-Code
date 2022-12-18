@@ -4,10 +4,6 @@ years=$(cd /mnt/c/Users/mikec/OneDrive/Git/Advent-of-Code/ && ls -1d */)
 
 for year in $years;
 do
-    if [[ $year == '2015/' || $year == '2016/' || $year == '2017/' || $year == '2018/' || $year == '2019/' || $year == '2020/' ]]
-    then
-        continue
-    fi
     cd $year
     days=$(ls -1d */)
     

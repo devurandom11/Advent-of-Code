@@ -1,4 +1,5 @@
 bin/
+getInput.sh
 # Prerequisites
 *.d
 
