@@ -9,6 +9,12 @@ const fs = require("fs");
 
 // Solution 1
 const calcWrappingPaper = (input) => {
+  // Map input to array of packages
+  const inputArray = input
+    .split("\n")
+    .map((string) => string.split("x").map(Number));
+
+  const result = inputArray;
   return result;
 };
 
