@@ -8,7 +8,7 @@ Tests
 const fs = require("fs");
 
 // Solution 2
-const calcWrappingPaper = (input) => {
+const calcRibbonLength = (input) => {
   // Map input to array of packages
   let result = 0;
   const inputArray = input
@@ -21,14 +21,11 @@ const calcWrappingPaper = (input) => {
     const length = element[0];
     const width = element[1];
     const height = element[2];
-    const smallestSideArea = element[0] * element[1];
+    const ribbonLength = length * 2 + width * 2;
+    const bowLength = length * width * height;
+
     // Calculate running total
-    result += Number(
-      2 * length * width +
-        2 * width * height +
-        2 * height * length +
-        smallestSideArea
-    );
+    result += Number(ribbonLength + bowLength);
   });
 
   return result;
@@ -36,4 +33,4 @@ const calcWrappingPaper = (input) => {
 
 // Solve
 const userInput = fs.readFileSync("./input.txt").toString();
-console.log(calcWrappingPaper(userInput));
+console.log(calcRibbonLength(userInput));
