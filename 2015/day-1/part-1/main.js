@@ -11,15 +11,12 @@ const fs = require("fs");
 const elevator = (inputText) => {
   const inputArray = inputText.split("");
   let floor = 0;
-  inputArray.forEach((item) => {
+  for (const item of inputArray) {
     if (item === "(") {
       floor++;
-    } else if (item === ")") {
-      floor--;
-    } else {
-      console.error("There was something unexpected in the input");
-    }
-  });
+    } else floor--;
+  }
+
   return floor;
 };
 

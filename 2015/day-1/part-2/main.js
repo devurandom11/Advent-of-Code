@@ -10,10 +10,10 @@ const elevator = (inputText) => {
   let floor = 0;
   let steps = 0;
 
-  for (const item in inputArray) {
+  for (const item of inputArray) {
     steps++;
     if (floor >= 0) {
-      if (inputArray[item] == "(") {
+      if (item == "(") {
         floor++;
       } else floor--;
     } else return steps;
