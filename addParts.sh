@@ -4,7 +4,7 @@ years=$(cd /mnt/c/Users/mikec/OneDrive/Git/Advent-of-Code/ && ls -1d */)
 
 for year in $years;
 do
-    if [[ $year == '2015/' || $year == '2016/' || $year == '2017/' || $year == '2018/'  ]]
+    if [[ $year == '2015/' || $year == '2016/' || $year == '2017/' || $year == '2018/' || $year == '2019/' ]]
     then
         continue
     fi
@@ -18,12 +18,12 @@ do
         [ ! -f "README.md" ] && echo "# Advent of Code --- Day $day" > README.md || echo "README already exists";
         cd part-1
         echo $(pwd)
-        [ ! -f "main.*" ] && touch {main.java,input.txt} || echo "Files already exist...";
+        [ ! -f "main.*" ] && touch {main.rs,input.txt} || echo "Files already exist...";
         cd ../
         echo $(pwd)
         cd part-2
         echo $(pwd)
-        [ ! -f "main.js" ] && touch {main.java,input.txt} || echo "Files already exist...";
+        [ ! -f "main.js" ] && touch {main.rs,input.txt} || echo "Files already exist...";
         cd ../
         echo $(pwd)
         
