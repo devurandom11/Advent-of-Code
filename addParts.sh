@@ -22,12 +22,14 @@ do
         [ ! -f "main.js" ] && touch {main.js,input.txt} || echo "Files already exist...";
         cd ../
         echo $(pwd)
-        git add -A
-        git commit -am "Create skeleton for AoC ${year}${day}"
+        
         cd ../
         echo $(pwd)
         sleep 1;
     done
-    
+    git add -A
+    git commit -am "Create skeleton for AoC ${year}"
+    echo "Done with year $year"
+    sleep 10;
     cd ../
 done
