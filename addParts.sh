@@ -26,7 +26,7 @@ do
         git commit -am "Create skeleton for AoC ${year}${day}"
         cd ../
         echo $(pwd)
-        sleep 10;
+        sleep 1;
     done
     
     cd ../
