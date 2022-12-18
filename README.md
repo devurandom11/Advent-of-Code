@@ -1,2 +1,2 @@
 # Advent of Code
- Advent of Code challenges
+ Advent of Code Challenges
