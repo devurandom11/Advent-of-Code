@@ -21,10 +21,7 @@ do
         cd ../
         cd part-2
         [ ! -f "main.js" ] && touch {main.ts,input.txt} || echo "Files already exist...";
-        cd ../
-        cd ../
-        git add -A
-        git commit -am "Create skeleton for AoC ${year}${day}"
+        cd ../../
         echo "Commit for ${year}${day} complete!"
         sleep 1;
     done
@@ -33,3 +30,5 @@ do
     sleep 1;
     cd ../
 done
+git add -A
+git commit -am "Create skeleton for AoC ${year}"
