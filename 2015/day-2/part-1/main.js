@@ -34,6 +34,6 @@ const calcWrappingPaper = (input) => {
   return result;
 };
 
-// Tests
+// Solve
 const userInput = fs.readFileSync("./input.txt").toString();
 console.log(calcWrappingPaper(userInput));
