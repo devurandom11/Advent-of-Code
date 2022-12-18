@@ -10,13 +10,15 @@ do
     for day in $days;
     do
         cd $day
-        [ -d "part-1" ] && rm -rf part* || echo "Directory already exists..."
+        [ ! -d "part-1" ] && mkdir {part-1,part-2} || echo "Directory already exists..."
         [ ! -f "README.md" ] && echo "# Advent of Code --- Day $day" > README.md || echo "README already exists"
-        # cd part-1
-        # [ ! -f "main.js" ] && touch {main.js,input.txt} || echo "Files already exist..."
-        # cd ../
-        # cd part-2
-        # [ ! -f "main.js" ] && touch {main.js,input.txt} || echo "Files already exist..."
+        cd part-1
+        [ ! -f "main.js" ] && touch {main.js,input.txt} || echo "Files already exist..."
+        cd ../
+        cd part-2
+        [ ! -f "main.js" ] && touch {main.js,input.txt} || echo "Files already exist..."
+        cd ../
+        git commit -am "Create skeleton for AoC ${year}${day}" && echo "Git commit success" || echo "FAILURE!!!"
         cd ../
     done
     
