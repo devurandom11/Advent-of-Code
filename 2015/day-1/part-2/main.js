@@ -16,13 +16,13 @@ const elevator = (inputText) => {
       if (item == "(") {
         floor++;
       } else floor--;
-    } else return steps;
+    } else {
+      return steps;
+    }
   }
-};
 
-// Tests
-// const tests = "((())())))(((((((";
-// console.log(elevator(tests));
+  return steps;
+};
 
 const firstInput = fs.readFileSync("./input.txt").toString();
 console.log(elevator(firstInput));
