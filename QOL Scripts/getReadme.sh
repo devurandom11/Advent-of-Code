@@ -10,12 +10,12 @@ do
     
     for day in $days;
     do
-        dayint=$(echo $day | awk -F'-' '{print $2}')
+        dayint=$(echo $day | awk -F'-' '{print $2}' | awk -F'/' '{print $1}' )
         cd $day
-        [ ! -f "README.md" ] && curl ${baseurl}/${year}day/${dayint} > README.md || rm -rf README.md
+        [ ! -f "README.md" ] && curl "${baseurl}/${year}day/${dayint}" | sed -n '/--- Day /,/To play, please/p' > README.md || rm -rf README.md
         echo "Downloading README from ${baseurl}/${year}day/${dayint}"
         cd ../
-        echo "Readme curled from $baseurl/${year}day${dayint} complete!"
+        echo "Readme curled from $baseurl/${year}day/${dayint} complete!"
         sleep 1;
     done
     
