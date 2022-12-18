@@ -20,8 +20,7 @@ const elevator = (inputText) => {
       console.error("There was something unexpected in the input");
     }
   });
-  console.log(`The final floor is: ${floor}`);
-  //   return floor;
+  return floor;
 };
 
 // Tests
@@ -31,4 +30,4 @@ const elevator = (inputText) => {
 // });
 
 const firstInput = fs.readFileSync("./input.txt").toString();
-elevator(firstInput);
+console.log(elevator(firstInput));
