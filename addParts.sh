@@ -25,6 +25,7 @@ do
         cd ../
         git add -A
         git commit -am "Create skeleton for AoC ${year}${day}"
+        echo "Commit for ${year}${day} complete!"
         sleep 1;
     done
     
