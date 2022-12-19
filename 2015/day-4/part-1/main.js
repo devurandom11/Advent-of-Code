@@ -7,10 +7,10 @@ const crypto = require("crypto");
 const mineMeSomeCoins = (input) => {
   let hashFound = false;
   let testString = input;
-  let i = 1048960;
+  let i = 0;
   while (hashFound === false) {
     // Test the hash
-    for (i; i > -1; i++) {
+    for (i; true; i++) {
       let toTest = crypto
         .createHash("MD5")
         .update(testString)
@@ -18,13 +18,12 @@ const mineMeSomeCoins = (input) => {
         .slice(0, 5);
       if (toTest === "00000") {
         hashFound = true;
-        return i;
+        return --i;
       }
       testString = input + i;
     }
   }
 };
 
-const input = "pqrstuv";
-// const input = fs.readFileSync("./input.txt").toString();
+const input = fs.readFileSync("./input.txt").toString();
 console.log(mineMeSomeCoins(input));
