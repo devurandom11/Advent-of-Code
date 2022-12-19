@@ -12,6 +12,7 @@ const calcTotalHousesWithPresents = (input) => {
 
   for (let i = 0; i < input.length; i++) {
     let x, y;
+
     // Determine which Santa to use based on iteration
     if (i % 2 === 0) {
       x = santaX;
