@@ -1,3 +1,4 @@
+// Solution 1
 const fs = require("fs");
 
 const calcTotalHousesWithPresents = (input) => {
