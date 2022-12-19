@@ -1,80 +1,57 @@
 const fs = require("fs");
 
 const calcTotalHousesWithPresents = (input) => {
-  // Set starting point and add to both sets
+  // Set starting point
   let santaX = 0;
   let santaY = 0;
   let roboX = 0;
   let roboY = 0;
-  const santaSet = new Set();
-  const roboSet = new Set();
-  const finalSet = new Set();
-  const inputArray = input.split("");
-  const santaArray = [];
-  const roboArray = [];
-  santaSet.add(`${santaX}, ${santaY}`);
-  roboSet.add(`${roboX}, ${roboY}`);
+  const visitedHouses = new Set();
 
-  // Split array
-  for (let i = 0; i < inputArray.length; i++) {
-    if (i === 0) {
-      santaArray.push(inputArray[i]);
-    } else if (i % 2 === 0) {
-      santaArray.push(inputArray[i]);
-    } else roboArray.push(inputArray[i]);
-  }
+  visitedHouses.add(`${santaX}, ${santaY}`);
 
-  // Process Santa
-  for (const item of santaArray) {
-    switch (item) {
+  for (let i = 0; i < input.length; i++) {
+    let x, y;
+    // Determine which Santa to use based on iteration
+    if (i % 2 === 0) {
+      x = santaX;
+      y = santaY;
+    } else {
+      x = roboX;
+      y = roboY;
+    }
+
+    switch (input[i]) {
       case "<":
-        santaX -= 1;
+        x -= 1;
         break;
 
       case ">":
-        santaX += 1;
+        x += 1;
         break;
 
       case "^":
-        santaY += 1;
+        y += 1;
         break;
 
       case "v":
-        santaY -= 1;
+        y -= 1;
         break;
     }
-    santaSet.add(`${santaX}, ${santaY}`);
-  }
-  // Process Robosanta
-  for (const item of roboArray) {
-    switch (item) {
-      case "<":
-        roboX -= 1;
-        break;
 
-      case ">":
-        roboX += 1;
-        break;
-
-      case "^":
-        roboY += 1;
-        break;
-
-      case "v":
-        roboY -= 1;
-        break;
+    // Update Santa's position
+    if (i % 2 === 0) {
+      santaX = x;
+      santaY = y;
+    } else {
+      roboX = x;
+      roboY = y;
     }
-    roboSet.add(`${roboX}, ${roboY}`);
+
+    visitedHouses.add(`${x}, ${y}`);
   }
 
-  for (const item of santaSet) {
-    finalSet.add(item);
-  }
-  for (const item of roboSet) {
-    finalSet.add(item);
-  }
-
-  return finalSet.size;
+  return visitedHouses.size;
 };
 
 const userInput = fs.readFileSync("./input.txt").toString();
