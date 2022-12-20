@@ -1,9 +1,8 @@
 // Solution 2
-
 const fs = require("fs");
 
 const testPair = (str) => {
-  return false;
+  if (str !== "a") return true;
 };
 
 const testRepeat = (str) => {
@@ -13,12 +12,17 @@ const testRepeat = (str) => {
 const findMeSomeStrings = (str) => {
   const inputArray = str.split("\n");
   let niceStrings = 0;
-  let pair = false;
-  let repeat = false;
-
-  // If both tests pass, increment niceStrings
-  if (pair && repeat) {
-    niceStrings += 1;
+  // Check each string against tests
+  for (const item of inputArray) {
+    let pair = false;
+    let repeat = false;
+    pair = testPair(item);
+    if (!pair) {
+      continue;
+    }
+    repeat = testRepeat(item);
+    // If both tests pass, increment niceStrings
+    if (repeat && pair) niceStrings += 1;
   }
 
   return niceStrings;
