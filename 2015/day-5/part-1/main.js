@@ -2,7 +2,6 @@ const fs = require("fs");
 
 const findMeSomeStrings = (input) => {
   const inputArray = input.split("\n");
-  const vowels = "aeiou";
   let niceStrings = [];
   let naughtyStrings = [];
 
@@ -20,24 +19,19 @@ const findMeSomeStrings = (input) => {
     }
 
     let duplicate = 0;
-    for (let i = 1; i < testString.length; i++) {
-      if (testString[i - 1] === testString[i]) {
-        duplicate += 1;
-      }
+    const duplicateRegex = /([a-z])\1/; // Regular expression that matches any character followed by itself
+    if (duplicateRegex.test(testString)) {
+      // Test the string for a match
+      duplicate += 1;
     }
     if (duplicate === 0) {
       console.log("No Duplicates Found in: ", testString);
       naughtyStrings.push(testString);
       continue;
     }
-    let vowelCount = 0;
-    for (const char of testString) {
-      for (const vowel of vowels) {
-        if (char === vowel) {
-          vowelCount += 1;
-        }
-      }
-    }
+    const vowelsRegex = /[aeiou]/g; // Regular expression that matches any vowel
+    let vowelCount = (testString.match(vowelsRegex) || []).length; // Count the number of vowels in the string
+
     if (vowelCount < 3) {
       naughtyStrings.push(testString);
       console.log("Less than 3 vowels in: ", testString);
