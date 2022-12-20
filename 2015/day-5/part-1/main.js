@@ -1,3 +1,5 @@
+// Solution 1
+
 const fs = require("fs");
 
 const findMeSomeStrings = (input) => {
