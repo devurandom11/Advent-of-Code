@@ -2,19 +2,15 @@ const fs = require("fs");
 
 const findMeSomeStrings = (input) => {
   const inputArray = input.split("\n");
-  let niceStrings = [];
-  let naughtyStrings = [];
+  let niceStrings = 0;
 
   for (const testString of inputArray) {
-    console.warn("Nice String Array Contents: ", niceStrings);
     if (
       testString.includes("ab") ||
       testString.includes("cd") ||
       testString.includes("pq") ||
       testString.includes("xy")
     ) {
-      console.log("Found a substring not allowed in: ", testString);
-      naughtyStrings.push(testString);
       continue;
     }
 
@@ -25,26 +21,17 @@ const findMeSomeStrings = (input) => {
       duplicate += 1;
     }
     if (duplicate === 0) {
-      console.log("No Duplicates Found in: ", testString);
-      naughtyStrings.push(testString);
       continue;
     }
     const vowelsRegex = /[aeiou]/g; // Regular expression that matches any vowel
     let vowelCount = (testString.match(vowelsRegex) || []).length; // Count the number of vowels in the string
 
     if (vowelCount < 3) {
-      naughtyStrings.push(testString);
-      console.log("Less than 3 vowels in: ", testString);
       continue;
     }
-    console.log(
-      testString,
-      " Passed the test and is being added to the niceString Array"
-    );
-    niceStrings.push(testString);
+    niceStrings += 1;
   }
-
-  return niceStrings.length;
+  return niceStrings;
 };
 
 const input = fs.readFileSync("./input.txt").toString();
