@@ -7,15 +7,11 @@ const findMeSomeStrings = (input) => {
   let niceStrings = 0;
 
   for (const testString of inputArray) {
-    if (
-      testString.includes("ab") ||
-      testString.includes("cd") ||
-      testString.includes("pq") ||
-      testString.includes("xy")
-    ) {
+    for (let i = 0; i < testString.length - 1; i++) {
+      if (testString[i] === testString[i + 1]) {
+      }
       continue;
     }
-
     let duplicate = 0;
     const duplicateRegex = /([a-z])\1/; // Regular expression that matches any character followed by itself
     if (duplicateRegex.test(testString)) {
