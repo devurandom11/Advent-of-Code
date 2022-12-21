@@ -1,5 +1,4 @@
 // Solution 1
-const { dir } = require("console");
 const fs = require("fs");
 
 const buildGrid = () => {
@@ -10,9 +9,9 @@ const buildGrid = () => {
     const row = [];
     for (let j = 0; j < colnum; j++) {
       row.push({
-        row: i,
-        col: j,
-        status: "off",
+        r: i,
+        c: j,
+        status: -1, // -1 off, 1 on
       });
     }
     grid.push(row);
@@ -40,7 +39,7 @@ const lightEmUp = (input) => {
   const directions = getDirections(inputArray);
   const newGrid = buildNewGrid(grid, coordinates, directions);
 
-  return newGrid;
+  return grid;
 };
 const input =
   "turn on 0,0 through 999,999\ntoggle 0,0 through 999,0\nturn off 499,499 through 500,500\n";
