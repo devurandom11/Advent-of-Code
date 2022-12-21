@@ -1,6 +1,5 @@
 // Solution 1
 const fs = require("fs");
-const { type } = require("os");
 
 // Build starting grid
 const buildGrid = () => {
@@ -34,7 +33,14 @@ const getCoords = (str) => {
   return coords;
 };
 
-const getDirections = (str) => {};
+const getDirections = (str) => {
+  const directions = str.includes("turn")
+    ? str.includes("on")
+      ? "on"
+      : "off"
+    : "toggle";
+  return directions;
+};
 
 const updateLights = (grid, coords, directions) => {};
 
