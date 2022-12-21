@@ -2,18 +2,25 @@
 const fs = require("fs");
 
 const lightEmUp = (input) => {
-  let grid = [];
-  let x, y;
-
-  for (let i = 0; i < 1000; i++) {
-    for (let r = 0; r < 1000; r++) {
-      x = r;
-      y = i;
-      grid.push([x, y]);
+  const inputArray = input.split("\n");
+  const rownum = 1000;
+  const colnum = 1000;
+  const grid = [];
+  for (let i = 0; i < rownum; i++) {
+    const row = [];
+    for (let j = 0; j < colnum; j++) {
+      row.push({
+        row: i,
+        col: j,
+        status: "off",
+      });
     }
+    grid.push(row);
   }
   return grid;
 };
+const input =
+  "turn on 0,0 through 999,999\ntoggle 0,0 through 999,0\nturn off 499,499 through 500,500\n";
+// const input = fs.readFileSync("./input.txt").toString();
 
-const input = "test";
-console.dir(lightEmUp(input), { maxArrayLength: null });
+console.log(lightEmUp(input));
