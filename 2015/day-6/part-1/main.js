@@ -24,8 +24,8 @@ const buildGrid = () => {
 const getCoords = (str) => {
   const coords = {};
   coords["x1"] = parseInt(
-    str.split("through")[0].split(",")[
-      str.split("through")[0].split(",").length - 1
+    str.split("through")[0].split(",")[0].split(" ")[
+      str.split("through")[0].split(",")[0].split(" ").length - 1
     ]
   );
   coords["y1"] = parseInt(str.split("through")[0].split(",")[1]);
@@ -48,9 +48,8 @@ const lightEmUp = (input) => {
   }
   return grid;
 };
-const input =
-  "turn on 0,0 through 999,999\ntoggle 0,0 through 999,0\nturn off 499,499 through 500,500\n";
-// const input = fs.readFileSync("./input.txt").toString();
+// const input = "turn on 0,0 through 999,999\ntoggle 0,0 through 999,0\nturn off 499,499 through 500,500\n";
+const input = fs.readFileSync("./input.txt").toString();
 
 const testing = lightEmUp(input);
 console.dir(testing);
