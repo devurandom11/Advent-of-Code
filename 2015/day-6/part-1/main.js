@@ -11,7 +11,7 @@ const buildGrid = () => {
       row.push({
         r: i,
         c: j,
-        status: -1, // -1 off, 1 on
+        status: false,
       });
     }
     grid.push(row);
