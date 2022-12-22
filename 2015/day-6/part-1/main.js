@@ -24,6 +24,7 @@ const getCoords = (str) => {
   return { x1, y1, x2, y2 };
 };
 
+// YIKES!
 // const getCoords = (str) => {
 // if (!str) return;
 // const coords = {};
@@ -83,7 +84,6 @@ const lightEmUp = (input) => {
 };
 
 const input = parseInput("./input.txt");
-// const input = "turn on 499,499 through 500,500";
 const results = lightEmUp(input);
 let count = 0;
 for (let x = 0; x < 1000; x++) {
@@ -94,5 +94,4 @@ for (let x = 0; x < 1000; x++) {
   }
 }
 
-// console.table(results, ["x", "y", "status"]);
 console.log(count);

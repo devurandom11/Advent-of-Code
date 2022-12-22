@@ -1,4 +1,4 @@
-// Solution 1
+// Solution 2
 const { parseInput } = require("../../utils/input-parser.js");
 
 // Build starting grid
@@ -73,7 +73,6 @@ const lightEmUp = (input) => {
 };
 
 const input = parseInput("./input.txt");
-// const input = "turn off 499,499 through 500,500";
 const results = lightEmUp(input);
 let count = 0;
 for (let x = 0; x < 1000; x++) {
@@ -82,5 +81,4 @@ for (let x = 0; x < 1000; x++) {
   }
 }
 
-// console.table(results, ["x", "y", "power"]);
 console.log(count);
