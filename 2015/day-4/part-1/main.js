@@ -1,5 +1,5 @@
 // Solution 1
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser");
 const crypto = require("crypto");
 
 const mineMeSomeCoins = (input) => {
@@ -23,5 +23,5 @@ const mineMeSomeCoins = (input) => {
   }
 };
 
-const input = fs.readFileSync("./input.txt").toString();
+const input = parseInput("./input.txt");
 console.log(mineMeSomeCoins(input));

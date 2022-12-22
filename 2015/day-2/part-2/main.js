@@ -1,4 +1,4 @@
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser");
 
 // Solution 2
 const calcRibbonLength = (input) => {
@@ -20,5 +20,5 @@ const calcRibbonLength = (input) => {
 };
 
 // Solve
-const userInput = fs.readFileSync("./input.txt").toString();
-console.log(calcRibbonLength(userInput));
+const firstInput = parseInput("./input.txt");
+console.log(calcRibbonLength(firstInput));

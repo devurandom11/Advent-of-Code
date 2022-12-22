@@ -1,6 +1,5 @@
 // Solution 1
-
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser");
 
 const findMeSomeStrings = (input) => {
   const inputArray = input.split("\n");
@@ -36,5 +35,5 @@ const findMeSomeStrings = (input) => {
   return niceStrings;
 };
 
-const input = fs.readFileSync("./input.txt").toString();
+const input = parseInput("./input.txt");
 console.log(findMeSomeStrings(input));

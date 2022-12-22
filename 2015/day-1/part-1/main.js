@@ -1,4 +1,4 @@
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser");
 
 // Solution 1
 const elevator = (inputText) => {
@@ -13,5 +13,5 @@ const elevator = (inputText) => {
   return floor;
 };
 
-const firstInput = fs.readFileSync("./input.txt").toString();
+const firstInput = parseInput("./input.txt");
 console.log(elevator(firstInput));

@@ -1,4 +1,5 @@
-const fs = require("fs");
+// Solution 2
+const { parseInput } = require("../../utils/input-parser");
 
 const calcTotalHousesWithPresents = (input) => {
   // Set starting point
@@ -55,5 +56,5 @@ const calcTotalHousesWithPresents = (input) => {
   return visitedHouses.size;
 };
 
-const userInput = fs.readFileSync("./input.txt").toString();
-console.log(calcTotalHousesWithPresents(userInput));
+const firstInput = parseInput("./input.txt");
+console.log(calcTotalHousesWithPresents(firstInput));

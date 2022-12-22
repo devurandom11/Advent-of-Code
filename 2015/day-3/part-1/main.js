@@ -1,5 +1,5 @@
 // Solution 1
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser");
 
 const calcTotalHousesWithPresents = (input) => {
   // Set starting point and add to set
@@ -35,5 +35,5 @@ const calcTotalHousesWithPresents = (input) => {
   return result;
 };
 
-const userInput = fs.readFileSync("./input.txt").toString();
-console.log(calcTotalHousesWithPresents(userInput));
+const firstInput = parseInput("./input.txt");
+console.log(calcTotalHousesWithPresents(firstInput));

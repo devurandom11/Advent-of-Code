@@ -1,5 +1,5 @@
 // Solution 2
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser");
 
 // Slide a window of two characters over the string, searching the string before and after the window for duplicates.
 const testPair = (str) => {
@@ -39,5 +39,5 @@ const findMeSomeStrings = (str) => {
   return niceStrings;
 };
 
-const input = fs.readFileSync("./input.txt").toString();
+const input = parseInput("./input.txt");
 console.log(findMeSomeStrings(input));

@@ -1,4 +1,4 @@
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser");
 
 // Solution 1
 const calcWrappingPaper = (input) => {
@@ -25,5 +25,5 @@ const calcWrappingPaper = (input) => {
 };
 
 // Solve
-const userInput = fs.readFileSync("./input.txt").toString();
-console.log(calcWrappingPaper(userInput));
+const firstInput = parseInput("./input.txt");
+console.log(calcWrappingPaper(firstInput));

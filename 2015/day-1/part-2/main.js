@@ -2,7 +2,7 @@
 ) causes him to enter the basement at character position 1.
 ()()) causes him to enter the basement at character position 5.
 */
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser");
 
 // Solution 2
 const elevator = (inputText) => {
@@ -24,5 +24,5 @@ const elevator = (inputText) => {
   return steps;
 };
 
-const firstInput = fs.readFileSync("./input.txt").toString();
+const firstInput = parseInput("./input.txt");
 console.log(elevator(firstInput));
