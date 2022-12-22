@@ -1,1 +1,31 @@
 const { parseInput } = require("../../utils/input-parser");
+
+// Parse instructions splitting in "->"
+const parseInstructions = (str) => {
+  const instructions = [];
+  const startArr = str.split("\n");
+  for (const item of startArr) {
+    let rightStr = item.split("->")[1];
+    let leftStr = item.split("->")[0];
+    instructions.push({ leftVal: leftStr, rightVal: rightStr });
+  }
+  return instructions;
+};
+
+// Process instructions one at a time
+const processInstructions = (arr) => {
+  const finalArr = [];
+  for (const item of arr) {
+    finalArr.push(item);
+  }
+  return finalArr;
+};
+
+const main = () => {
+  const inputStr = parseInput("./input.txt");
+  const instructions = parseInstructions(inputStr);
+  const result = processInstructions(instructions);
+  console.log(result);
+};
+
+main();
