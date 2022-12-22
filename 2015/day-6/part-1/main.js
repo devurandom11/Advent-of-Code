@@ -71,6 +71,18 @@ const updateLights = (grid, coords, directions) => {
   return grid;
 };
 
+const countLights = (grid) => {
+  let count = 0;
+  for (let x = 0; x < 1000; x++) {
+    for (let y = 0; y < 1000; y++) {
+      if (grid[x][y].status) {
+        count += 1;
+      }
+    }
+  }
+  return count;
+};
+
 const lightEmUp = (input) => {
   if (!input) return;
   const inputArr = input.split("\n");
@@ -84,14 +96,6 @@ const lightEmUp = (input) => {
 };
 
 const input = parseInput("./input.txt");
-const results = lightEmUp(input);
-let count = 0;
-for (let x = 0; x < 1000; x++) {
-  for (let y = 0; y < 1000; y++) {
-    if (results[x][y].status) {
-      count += 1;
-    }
-  }
-}
 
-console.log(count);
+const results = lightEmUp(input);
+console.log(countLights(results));
