@@ -1,5 +1,5 @@
 // Solution 1
-const fs = require("fs");
+const { parseInput } = require("../../utils/input-parser.js");
 
 // Build starting grid
 const buildGrid = () => {
@@ -21,6 +21,7 @@ const buildGrid = () => {
 };
 
 const getCoords = (str) => {
+  if (str === null || str === undefined || str === "") return;
   const coords = {};
   coords["x1"] = parseInt(
     str.split("through")[0].split(",")[0].split(" ")[
@@ -42,7 +43,24 @@ const getDirections = (str) => {
   return directions;
 };
 
-const updateLights = (grid, coords, directions) => {};
+const updateLights = (grid, coords, directions) => {
+  for (let i = coords.x1; i <= coords.x2; i++) {
+    for (let j = coords.y1; j <= coords.y2; j++) {
+      switch (directions) {
+        case "on":
+          grid[i][j].status = true;
+          break;
+        case "off":
+          grid[i][j].status = false;
+          break;
+        case "toggle":
+          grid[i][j].status = !grid[i][j].status;
+          break;
+      }
+    }
+  }
+  return grid;
+};
 
 const lightEmUp = (input) => {
   const inputArray = input.split("\n");
@@ -54,8 +72,5 @@ const lightEmUp = (input) => {
   }
   return grid;
 };
-// const input = "turn on 0,0 through 999,999\ntoggle 0,0 through 999,0\nturn off 499,499 through 500,500\n";
-const input = fs.readFileSync("./input.txt").toString();
 
-const testing = lightEmUp(input);
-console.dir(testing);
+const input = parseInput("./input.txt");
