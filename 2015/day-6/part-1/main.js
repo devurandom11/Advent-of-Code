@@ -3,15 +3,13 @@ const { parseInput } = require("../../utils/input-parser.js");
 
 // Build starting grid
 const buildGrid = () => {
-  const y = 1000;
-  const x = 1000;
+  const y1 = 1000;
+  const x1 = 1000;
   const grid = [];
-  for (let i = 0; i < y; i++) {
+  for (let x = 0; x < x1; x++) {
     const row = [];
-    for (let j = 0; j < x; j++) {
+    for (let y = 0; y < y1; y++) {
       row.push({
-        x: j,
-        y: i,
         status: false,
       });
     }
@@ -52,17 +50,17 @@ const getStatus = (str) => {
 
 const updateLights = (grid, coords, directions) => {
   if (!grid || !coords || !directions) return "ERROR";
-  for (let i = coords.x1; i < coords.x2 + 1; i++) {
-    for (let j = coords.y1; j < coords.y2 + 1; j++) {
+  for (let y = coords.x1; y < coords.x2 + 1; y++) {
+    for (let x = coords.y1; x < coords.y2 + 1; x++) {
       switch (directions) {
         case "on":
-          grid[i][j]["status"] = true;
+          grid[x][y].status = true;
           break;
         case "off":
-          grid[i][j]["status"] = false;
+          grid[x][y].status = false;
           break;
         case "toggle":
-          grid[i][j]["status"] = !grid[j][i]["status"];
+          grid[x][y].status = !grid[x][y].status;
           break;
         default:
           return "ERROR";
@@ -88,9 +86,9 @@ const input = parseInput("./input.txt");
 // const input = "turn on 499,499 through 500,500";
 const results = lightEmUp(input);
 let count = 0;
-for (let i = 0; i < 1000; i++) {
-  for (let j = 0; j < 1000; j++) {
-    if (results[j][i].status === true) {
+for (let x = 0; x < 1000; x++) {
+  for (let y = 0; y < 1000; y++) {
+    if (results[x][y].status) {
       count += 1;
     }
   }
