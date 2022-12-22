@@ -84,7 +84,7 @@ const lightEmUp = (input) => {
   return grid;
 };
 
-// const input = "turn on 0,0 through 500,500";
+// const input = "turn on 0,0 through 999,0";
 const input = parseInput("./input.txt");
 const results = lightEmUp(input);
 let count = 0;
