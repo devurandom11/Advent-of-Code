@@ -52,8 +52,8 @@ const getStatus = (str) => {
 
 const updateLights = (grid, coords, directions) => {
   if (!grid || !coords || !directions) return "ERROR";
-  for (let i = coords["y1"]; i <= coords["y2"]; i++) {
-    for (let j = coords["x1"]; j <= coords["x2"]; j++) {
+  for (let i = coords.x1; i < coords.x2 + 1; i++) {
+    for (let j = coords.y1; j < coords.y2 + 1; j++) {
       switch (directions) {
         case "on":
           grid[i][j]["status"] = true;
@@ -84,8 +84,8 @@ const lightEmUp = (input) => {
   return grid;
 };
 
-// const input = "turn on 0,0 through 999,0";
 const input = parseInput("./input.txt");
+// const input = "turn on 499,499 through 500,500";
 const results = lightEmUp(input);
 let count = 0;
 for (let i = 0; i < 1000; i++) {
