@@ -56,13 +56,13 @@ const updateLights = (grid, coords, directions) => {
     for (let j = coords["x1"]; j <= coords["x2"]; j++) {
       switch (directions) {
         case "on":
-          grid[j][i]["status"] = true;
+          grid[i][j]["status"] = true;
           break;
         case "off":
-          grid[j][i]["status"] = false;
+          grid[i][j]["status"] = false;
           break;
         case "toggle":
-          grid[j][i]["status"] = !grid[j][i]["status"];
+          grid[i][j]["status"] = !grid[j][i]["status"];
           break;
         default:
           return "ERROR";
@@ -77,15 +77,24 @@ const lightEmUp = (input) => {
   const inputArr = input.split("\n");
   let grid = buildGrid();
   for (const line of inputArr) {
-    try {
-      const coordinates = getCoords(line);
-      const directions = getStatus(line);
-      grid = updateLights(grid, coordinates, directions);
-    } catch (error) {
-      console.log("ERROR: ", error);
-    }
-    return grid;
+    const coordinates = getCoords(line);
+    const directions = getStatus(line);
+    grid = updateLights(grid, coordinates, directions);
   }
+  return grid;
 };
+
+// const input = "turn on 0,0 through 500,500";
 const input = parseInput("./input.txt");
-console.log(lightEmUp(input));
+const results = lightEmUp(input);
+let count = 0;
+for (let i = 0; i < 1000; i++) {
+  for (let j = 0; j < 1000; j++) {
+    if (results[j][i].status === true) {
+      count += 1;
+    }
+  }
+}
+
+// console.table(results, ["x", "y", "status"]);
+console.log(count);
