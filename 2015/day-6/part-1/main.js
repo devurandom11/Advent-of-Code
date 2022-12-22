@@ -3,12 +3,12 @@ const { parseInput } = require("../../utils/input-parser.js");
 
 // Build starting grid
 const buildGrid = () => {
-  const rownum = 1000;
-  const colnum = 1000;
+  const y = 1000;
+  const x = 1000;
   const grid = [];
-  for (let i = 0; i < rownum; i++) {
+  for (let i = 0; i < y; i++) {
     const row = [];
-    for (let j = 0; j < colnum; j++) {
+    for (let j = 0; j < x; j++) {
       row.push({
         x: j,
         y: i,
@@ -21,20 +21,27 @@ const buildGrid = () => {
 };
 
 const getCoords = (str) => {
-  if (str === null || str === undefined || str === "") return;
-  const coords = {};
-  coords["x1"] = parseInt(
-    str.split("through")[0].split(",")[0].split(" ")[
-      str.split("through")[0].split(",")[0].split(" ").length - 1
-    ]
-  );
-  coords["y1"] = parseInt(str.split("through")[0].split(",")[1]);
-  coords["x2"] = parseInt(str.split("through")[1].split(",")[0]);
-  coords["y2"] = parseInt(str.split("through")[1].split(",")[1]);
-  return coords;
+  if (!str) return "ERROR";
+  const [x1, y1, x2, y2] = str.match(/\d+/g).map(Number);
+  return { x1, y1, x2, y2 };
 };
 
-const getDirections = (str) => {
+// const getCoords = (str) => {
+// if (!str) return;
+// const coords = {};
+// coords["x1"] = parseInt(
+//   str.split("through")[0].split(",")[0].split(" ")[
+//     str.split("through")[0].split(",")[0].split(" ").length - 1
+//   ]
+// );
+// coords["y1"] = parseInt(str.split("through")[0].split(",")[1]);
+// coords["x2"] = parseInt(str.split("through")[1].split(",")[0]);
+// coords["y2"] = parseInt(str.split("through")[1].split(",")[1]);
+// return coords;
+// };
+
+const getStatus = (str) => {
+  if (!str) return "ERROR";
   const directions = str.includes("turn")
     ? str.includes("on")
       ? "on"
@@ -44,18 +51,21 @@ const getDirections = (str) => {
 };
 
 const updateLights = (grid, coords, directions) => {
-  for (let i = coords.x1; i <= coords.x2; i++) {
-    for (let j = coords.y1; j <= coords.y2; j++) {
+  if (!grid || !coords || !directions) return "ERROR";
+  for (let i = coords["y1"]; i <= coords["y2"]; i++) {
+    for (let j = coords["x1"]; j <= coords["x2"]; j++) {
       switch (directions) {
         case "on":
-          grid[i][j].status = true;
+          grid[j][i]["status"] = true;
           break;
         case "off":
-          grid[i][j].status = false;
+          grid[j][i]["status"] = false;
           break;
         case "toggle":
-          grid[i][j].status = !grid[i][j].status;
+          grid[j][i]["status"] = !grid[j][i]["status"];
           break;
+        default:
+          return "ERROR";
       }
     }
   }
@@ -63,14 +73,19 @@ const updateLights = (grid, coords, directions) => {
 };
 
 const lightEmUp = (input) => {
-  const inputArray = input.split("\n");
+  if (!input) return;
+  const inputArr = input.split("\n");
   let grid = buildGrid();
-  for (const line of inputArray) {
-    const coordinates = getCoords(line);
-    const directions = getDirections(line);
-    grid = updateLights(grid, coordinates, directions);
+  for (const line of inputArr) {
+    try {
+      const coordinates = getCoords(line);
+      const directions = getStatus(line);
+      grid = updateLights(grid, coordinates, directions);
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
+    return grid;
   }
-  return grid;
 };
-
 const input = parseInput("./input.txt");
+console.log(lightEmUp(input));
