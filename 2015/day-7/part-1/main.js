@@ -5,10 +5,12 @@ const { parseInput } = require("../../utils/input-parser");
 const parseInstructions = (str) => {
   const instructions = [];
   const startArr = str.split("\n");
+
   for (const item of startArr) {
     const assignment = item.split("->")[1].trim();
     const leftStr = item.split("->")[0].trim();
     let leftVal = Number(leftStr);
+
     if (isNaN(leftVal)) {
       leftVal = leftStr.split(" ");
     } else {
@@ -19,15 +21,18 @@ const parseInstructions = (str) => {
       assignment: assignment,
     });
   }
+
   return instructions;
 };
 
 // Process instructions one at a time
 const processInstructions = (arr) => {
   const finalArr = [];
+
   for (const item of arr) {
     finalArr.push(item);
   }
+
   return finalArr;
 };
 
@@ -38,4 +43,6 @@ const main = () => {
   console.log(result);
 };
 
-main();
+if (this === this) {
+  main();
+}

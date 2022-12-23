@@ -1,4 +1,3 @@
-1000 -> z
 af AND ah -> ai
 NOT lk -> ll
 hz RSHIFT 1 -> is
