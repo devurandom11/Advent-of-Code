@@ -7,19 +7,50 @@ const parseInstructions = (str) => {
   const startArr = str.split("\n");
 
   for (const item of startArr) {
+    let leftVals = null;
+    let leftOperator = null;
+    let operator = null;
+    let operatorIndex = null;
+    let rightOperator = null;
     const assignment = item.split("->")[1].trim();
     const leftStr = item.split("->")[0].trim();
-    let leftVal = Number(leftStr);
 
-    if (isNaN(leftVal)) {
-      leftVal = leftStr.split(" ");
+    if (isNaN(leftStr)) {
+      leftVals = leftStr.split(" ");
+      for (const val of leftVals) {
+        if (
+          val === "AND" ||
+          val === "NOT" ||
+          val === "OR" ||
+          val === "RSHIFT" ||
+          val === "LSHIFT"
+        ) {
+          operatorIndex = leftVals.indexOf(val);
+          operator = val;
+          leftOperator = leftVals[operatorIndex - 1];
+          rightOperator = leftVals[operatorIndex + 1];
+        }
+      }
     } else {
-      leftVal = Number(leftStr);
+      leftVals = Number(leftStr);
     }
-    instructions.push({
-      leftVal: leftVal,
-      assignment: assignment,
-    });
+
+    if (isNaN(leftVals)) {
+      instructions.push({
+        originalString: item,
+        leftVals: leftVals,
+        leftOperator: leftOperator,
+        operator: operator,
+        rightOperator: rightOperator,
+        assignment: assignment,
+      });
+    } else {
+      instructions.push({
+        originalString: item,
+        leftVals: leftVals,
+        assignment: assignment,
+      });
+    }
   }
 
   return instructions;
@@ -39,8 +70,8 @@ const processInstructions = (arr) => {
 const main = () => {
   const inputStr = parseInput("./input.txt");
   const instructions = parseInstructions(inputStr);
-  const result = processInstructions(instructions);
-  console.log(result);
+  const results = processInstructions(instructions);
+  console.log(instructions);
 };
 
 if (this === this) {
