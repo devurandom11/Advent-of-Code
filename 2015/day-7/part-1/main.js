@@ -59,9 +59,16 @@ const parseInstructions = (str) => {
 // Process instructions one at a time
 const processInstructions = (arr) => {
   const finalArr = [];
-
+  let formula;
   for (const item of arr) {
-    finalArr.push(item);
+    if (!isNaN(item.leftVals)) {
+      formula = `${item.assignment} = ${item.leftVals}`;
+    } else if (item.leftOperator === undefined) {
+      formula = `${item.assignment} = ${item.operator} ${item.rightOperator}`;
+    } else {
+      formula = `${item.assignment} = ${item.leftOperator} ${item.operator} ${item.rightOperator}`;
+    }
+    finalArr.push(formula);
   }
 
   return finalArr;
@@ -71,7 +78,7 @@ const main = () => {
   const inputStr = parseInput("./input.txt");
   const instructions = parseInstructions(inputStr);
   const results = processInstructions(instructions);
-  console.log(instructions);
+  console.log(results);
 };
 
 if (this === this) {
