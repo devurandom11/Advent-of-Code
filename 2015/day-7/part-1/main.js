@@ -24,18 +24,24 @@ const mapInput = (arr) => {
 
   const mappedInput = [];
   for (let i = 0; i < mappedArr.length; i++) {
+    // Create object with strings
     mappedInput.push({
+      originalString: mappedArr[i].join(" "),
       assignment: mappedArr[i][mappedArr[i].indexOf("->") + 1],
       rightVal: mappedArr[i][mappedArr[i].indexOf("->") - 1],
       leftVal: mappedArr[i][mappedArr[i].indexOf("->") - 3],
       operator: mappedArr[i][mappedArr[i].indexOf("->") - 2],
     });
+
+    // Convert to Numbers
     if (!isNaN(mappedInput[i].rightVal)) {
       mappedInput[i].rightVal = Number(mappedInput[i].rightVal);
     }
     if (!isNaN(mappedInput[i].leftVal)) {
       mappedInput[i].leftVal = Number(mappedInput[i].leftVal);
     }
+
+    // Convert bitwise operators
     switch (mappedInput[i].operator) {
       case "AND":
         mappedInput[i].operator = `&`;
@@ -56,6 +62,7 @@ const mapInput = (arr) => {
         break;
     }
   }
+  // Return array of objects
   return mappedInput;
 };
 
@@ -65,5 +72,5 @@ const processInput = (arr) => {
   return processedArr;
 };
 
-// console.dir(main(), { maxArrayLength: null });
-main();
+console.dir(main(), { maxArrayLength: null });
+// main();
