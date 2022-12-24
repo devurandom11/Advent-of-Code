@@ -410,5 +410,10 @@ const processInput = (arr) => {
   return arr;
 };
 
+// Recurse backwards from the target assginment, 'a' in our case. Might need a different data structure providing constant lookups since I will be searching for objects based on assignment string
+const recurseSomething = (arr) => {
+  return arr;
+};
+
 console.dir(main(), { maxArrayLength: null });
 // main();
