@@ -5,7 +5,7 @@ const main = () => {
   const mappedInput = mapInput(inputArr);
   const processedInput = processInput(mappedInput);
   for (const item of processedInput) {
-    if (!isNaN(item.leftVal)) {
+    if (item.operator === undefined) {
       console.log(item);
     }
   }
@@ -35,6 +35,25 @@ const mapInput = (arr) => {
     }
     if (!isNaN(mappedInput[i].leftVal)) {
       mappedInput[i].leftVal = Number(mappedInput[i].leftVal);
+    }
+    switch (mappedInput[i].operator) {
+      case "AND":
+        mappedInput[i].operator = `&`;
+        break;
+      case "OR":
+        mappedInput[i].operator = `|`;
+        break;
+      case "NOT":
+        mappedInput[i].operator = `~`;
+        break;
+      case "LSHIFT":
+        mappedInput[i].operator = `<<`;
+        break;
+      case "RSHIFT":
+        mappedInput[i].operator = `>>`;
+        break;
+      default:
+        break;
     }
   }
   return mappedInput;
