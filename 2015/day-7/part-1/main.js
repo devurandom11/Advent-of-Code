@@ -5,7 +5,7 @@ const main = () => {
   const mappedInput = mapInput(inputArr);
   const processedInput = processInput(mappedInput);
   for (const item of processedInput) {
-    if (!isNaN(item.rightVal)) {
+    if (!isNaN(item.leftVal)) {
       console.log(item);
     }
   }
@@ -21,8 +21,8 @@ const mapInput = (arr) => {
     }
     return capitalStr.split(" ");
   });
-  const mappedInput = [];
 
+  const mappedInput = [];
   for (let i = 0; i < mappedArr.length; i++) {
     mappedInput.push({
       assignment: mappedArr[i][mappedArr[i].indexOf("->") + 1],
@@ -32,6 +32,9 @@ const mapInput = (arr) => {
     });
     if (!isNaN(mappedInput[i].rightVal)) {
       mappedInput[i].rightVal = Number(mappedInput[i].rightVal);
+    }
+    if (!isNaN(mappedInput[i].leftVal)) {
+      mappedInput[i].leftVal = Number(mappedInput[i].leftVal);
     }
   }
   return mappedInput;
