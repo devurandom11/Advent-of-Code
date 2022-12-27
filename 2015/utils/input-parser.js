@@ -1,5 +1,4 @@
 // File: input-parser.js
-
 const fs = require("fs");
 
 function parseInput(filePath) {
