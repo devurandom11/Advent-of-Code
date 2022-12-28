@@ -8,9 +8,10 @@ const timer = new Timer();
 // Solution 2
 const elevator = async (inputText) => {
   const lookupTable = { "(": 1, ")": -1 };
-
-  return inputText.split("").reduce((floor, step) => {
-    return (floor += lookupTable[step]);
+  let floor = 0;
+  steps = 0;
+  return inputText.split("").reduce((floor, steps) => {
+    return (floor += lookupTable[steps]);
   }, 0);
 };
 

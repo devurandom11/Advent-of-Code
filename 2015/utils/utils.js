@@ -19,13 +19,13 @@ class Timer {
   }
 
   start() {
-    this.startTime = Date.now();
+    this.startTime = process.hrtime();
   }
 
   end() {
-    const endTime = Date.now();
-    const elapsedTime = endTime - this.startTime;
-    console.log(`Elapsed time: ${elapsedTime}ms`);
+    const endTime = process.hrtime(this.startTime);
+    const elapsedTime = endTime[0] * 1e9 + endTime[1];
+    console.log(`Elapsed time: ${(elapsedTime * 1e-6).toFixed(2)}ms`);
   }
 }
 
