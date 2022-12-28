@@ -3,19 +3,9 @@ const { parseInput } = require("../../utils/input-parser.js");
 
 // Build starting grid
 const buildGrid = () => {
-  const y1 = 1000;
-  const x1 = 1000;
-  const grid = [];
-  for (let x = 0; x < x1; x++) {
-    const row = [];
-    for (let y = 0; y < y1; y++) {
-      row.push({
-        power: 0,
-      });
-    }
-    grid.push(row);
-  }
-  return grid;
+  const y1 = 50000;
+  const x1 = 50000;
+  return new Uint8Array(x1 * y1);
 };
 
 const getCoords = (str) => {
@@ -26,35 +16,24 @@ const getCoords = (str) => {
 
 const getStatus = (str) => {
   if (!str) return "ERROR";
-  const directions = str.includes("turn")
-    ? str.includes("on")
-      ? "on"
-      : "off"
+  return str.includes("turn on")
+    ? "on"
+    : str.includes("turn off")
+    ? "off"
     : "toggle";
-  return directions;
 };
 
 const updateLights = (grid, coords, directions) => {
   if (!grid || !coords || !directions) return "ERROR";
-  for (let y = coords.x1; y < coords.x2 + 1; y++) {
-    for (let x = coords.y1; x < coords.y2 + 1; x++) {
-      switch (directions) {
-        case "on":
-          grid[x][y].power += 1;
-          break;
-        case "off":
-          if (grid[x][y].power > 0) {
-            grid[x][y].power -= 1;
-            break;
-          }
-          grid[x][y].power = 0;
-          break;
-        case "toggle":
-          grid[x][y].power += 2;
-          break;
-        default:
-          return "ERROR";
-      }
+  for (let y = coords.x1; y <= coords.x2; y++) {
+    for (let x = coords.y1; x <= coords.y2; x++) {
+      const index = x * 50000 + y;
+      grid[index] =
+        directions === "on"
+          ? grid[index] + 1
+          : directions === "off"
+          ? Math.max(grid[index] - 1, 0)
+          : grid[index] + 2;
     }
   }
   return grid;
@@ -62,12 +41,9 @@ const updateLights = (grid, coords, directions) => {
 
 const countLights = (grid) => {
   let count = 0;
-  for (let x = 0; x < 1000; x++) {
-    for (let y = 0; y < 1000; y++) {
-      count += results[x][y].power;
-    }
+  for (let i = 0; i < grid.length; i++) {
+    count += grid[i];
   }
-
   return count;
 };
 
@@ -84,5 +60,7 @@ const lightEmUp = (input) => {
 };
 
 const input = parseInput("./input.txt");
+console.time("start");
 const results = lightEmUp(input);
 console.log(countLights(results));
+console.timeEnd("start");
