@@ -2,27 +2,23 @@
 ) causes him to enter the basement at character position 1.
 ()()) causes him to enter the basement at character position 5.
 */
-const { parseInput } = require("../../utils/input-parser");
+const { parseInput, pause } = require("../../utils/utils");
 
 // Solution 2
-const elevator = (inputText) => {
-  const inputArray = inputText.split("");
-  let floor = 0;
-  let steps = 0;
-
-  for (const item of inputArray) {
-    steps++;
-    if (floor >= 0) {
-      if (item == "(") {
-        floor++;
-      } else floor--;
-    } else {
-      return steps;
-    }
-  }
-
-  return steps;
+const elevator = async (inputText) => {
+  const lookupTable = { "(": 1, ")": -1 };
+  console.log("This program should pause for 1 second...");
+  await pause(1000);
+  console.log("Now we will pause for 10 seconds");
+  await pause(10000);
+  console.log("did it work?");
 };
 
 const firstInput = parseInput("./input.txt");
-console.log(elevator(firstInput));
+const main = async () => {
+  console.time("start");
+  await elevator(firstInput);
+  console.timeEnd("start");
+};
+
+main();
