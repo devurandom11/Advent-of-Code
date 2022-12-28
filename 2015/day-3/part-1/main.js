@@ -1,5 +1,6 @@
 // Solution 1
-const { parseInput } = require("../../utils/input-parser");
+const { parseInput, Timer } = require("../../utils/utils");
+const timer = new Timer();
 
 const calcTotalHousesWithPresents = (input) => {
   // Set starting point and add to set
@@ -35,5 +36,7 @@ const calcTotalHousesWithPresents = (input) => {
   return result;
 };
 
+timer.start();
 const firstInput = parseInput("./input.txt");
 console.log(calcTotalHousesWithPresents(firstInput));
+timer.end();

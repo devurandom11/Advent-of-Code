@@ -1,6 +1,7 @@
 // Solution 2
-const { parseInput } = require("../../utils/input-parser");
+const { parseInput, Timer } = require("../../utils/utils");
 const crypto = require("crypto");
+const timer = new Timer();
 
 function md5(inputString) {
   const hash = crypto.createHash("md5");
@@ -30,5 +31,7 @@ const mineMeSomeCoins = (input) => {
   return i;
 };
 
+timer.start();
 const input = parseInput("./input.txt");
 console.log(mineMeSomeCoins(input));
+timer.end();

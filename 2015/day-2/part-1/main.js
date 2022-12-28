@@ -1,4 +1,5 @@
-const { parseInput } = require("../../utils/input-parser");
+const { parseInput, Timer } = require("../../utils/utils");
+const timer = new Timer();
 
 // Solution 1
 const calcWrappingPaper = (input) => {
@@ -25,5 +26,8 @@ const calcWrappingPaper = (input) => {
 };
 
 // Solve
+
 const firstInput = parseInput("./input.txt");
+timer.start();
 console.log(calcWrappingPaper(firstInput));
+timer.end();

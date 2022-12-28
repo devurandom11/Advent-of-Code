@@ -1,5 +1,6 @@
 // Solution 1
-const { parseInput } = require("../../utils/input-parser.js");
+const { parseInput, Timer } = require("../../utils/utils");
+const timer = new Timer();
 
 // Build starting grid
 const buildGrid = () => {
@@ -63,8 +64,8 @@ const lightEmUp = (input) => {
   return grid;
 };
 
+timer.start();
 const input = parseInput("./input.txt");
-console.time("start");
 const results = lightEmUp(input);
 console.log(countLights(results));
-console.timeEnd("start");
+timer.end();

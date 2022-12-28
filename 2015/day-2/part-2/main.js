@@ -1,4 +1,5 @@
-const { parseInput } = require("../../utils/input-parser");
+const { parseInput, Timer } = require("../../utils/utils");
+const timer = new Timer();
 
 // Solution 2
 const calcRibbonLength = (input) => {
@@ -20,5 +21,7 @@ const calcRibbonLength = (input) => {
 };
 
 // Solve
+timer.start();
 const firstInput = parseInput("./input.txt");
 console.log(calcRibbonLength(firstInput));
+timer.end();

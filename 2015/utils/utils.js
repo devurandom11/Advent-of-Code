@@ -25,7 +25,11 @@ class Timer {
   end() {
     const endTime = process.hrtime(this.startTime);
     const elapsedTime = endTime[0] * 1e9 + endTime[1];
-    console.log(`Elapsed time: ${(elapsedTime * 1e-6).toFixed(2)}ms`);
+    console.log(
+      `Elapsed time: ${(elapsedTime * 1e-6).toFixed(2)}ms\nElapsed time: ${(
+        elapsedTime * 1e-9
+      ).toFixed(2)} Seconds`
+    );
   }
 }
 

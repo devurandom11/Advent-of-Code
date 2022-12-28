@@ -1,7 +1,3 @@
-/* Test Case
-) causes him to enter the basement at character position 1.
-()()) causes him to enter the basement at character position 5.
-*/
 const { parseInput, pause, Timer } = require("../../utils/utils");
 const timer = new Timer();
 

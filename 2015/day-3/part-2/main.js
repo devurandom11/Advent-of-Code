@@ -1,5 +1,6 @@
 // Solution 2
-const { parseInput } = require("../../utils/input-parser");
+const { parseInput, Timer } = require("../../utils/utils");
+const timer = new Timer();
 
 const calcTotalHousesWithPresents = (input) => {
   // Set starting point
@@ -56,5 +57,7 @@ const calcTotalHousesWithPresents = (input) => {
   return visitedHouses.size;
 };
 
+timer.start();
 const firstInput = parseInput("./input.txt");
 console.log(calcTotalHousesWithPresents(firstInput));
+timer.end();
