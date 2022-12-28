@@ -12,7 +12,25 @@ const pause = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
+// Timer class
+class Timer {
+  constructor() {
+    this.startTime = null;
+  }
+
+  start() {
+    this.startTime = Date.now();
+  }
+
+  end() {
+    const endTime = Date.now();
+    const elapsedTime = endTime - this.startTime;
+    console.log(`Elapsed time: ${elapsedTime}ms`);
+  }
+}
+
 module.exports = {
   parseInput,
   pause,
+  Timer,
 };
