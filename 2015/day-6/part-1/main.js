@@ -3,8 +3,8 @@ const { parseInput } = require("../../utils/input-parser.js");
 
 // Build starting grid
 const buildGrid = () => {
-  const y1 = 10000;
-  const x1 = 10000;
+  const y1 = 50000;
+  const x1 = 50000;
   return new Uint32Array(x1 * y1);
 };
 
@@ -16,29 +16,26 @@ const getCoords = (str) => {
 
 const getStatus = (str) => {
   if (!str) return "ERROR";
-  const directions = str.includes("turn")
-    ? str.includes("on")
-      ? "on"
-      : "off"
+  return str.includes("turn on")
+    ? "on"
+    : str.includes("turn off")
+    ? "off"
     : "toggle";
-  return directions;
 };
 
 const updateLights = (grid, coords, directions) => {
   if (!grid || !coords || !directions) return "ERROR";
   for (let y = coords.x1; y <= coords.x2; y++) {
     for (let x = coords.y1; x <= coords.y2; x++) {
-      switch (directions) {
-        case "on":
-          grid[x * 10000 + y] = 1;
-          break;
-        case "off":
-          grid[x * 10000 + y] = 0;
-          break;
-        case "toggle":
-          grid[x * 10000 + y] = grid[x * 10000 + y] === 1 ? 0 : 1;
-          break;
-      }
+      const index = x * 50000 + y;
+      grid[index] =
+        directions === "on"
+          ? 1
+          : directions === "off"
+          ? 0
+          : grid[index] === 1
+          ? 0
+          : 1;
     }
   }
   return grid;
