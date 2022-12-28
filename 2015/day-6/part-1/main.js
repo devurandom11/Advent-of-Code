@@ -24,21 +24,6 @@ const getCoords = (str) => {
   return { x1, y1, x2, y2 };
 };
 
-// YIKES!
-// const getCoords = (str) => {
-// if (!str) return;
-// const coords = {};
-// coords["x1"] = parseInt(
-//   str.split("through")[0].split(",")[0].split(" ")[
-//     str.split("through")[0].split(",")[0].split(" ").length - 1
-//   ]
-// );
-// coords["y1"] = parseInt(str.split("through")[0].split(",")[1]);
-// coords["x2"] = parseInt(str.split("through")[1].split(",")[0]);
-// coords["y2"] = parseInt(str.split("through")[1].split(",")[1]);
-// return coords;
-// };
-
 const getStatus = (str) => {
   if (!str) return "ERROR";
   const directions = str.includes("turn")
