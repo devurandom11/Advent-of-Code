@@ -5,7 +5,7 @@ const { parseInput } = require("../../utils/input-parser.js");
 const buildGrid = () => {
   const y1 = 50000;
   const x1 = 50000;
-  return new Uint32Array(x1 * y1);
+  return new Uint8Array(x1 * y1);
 };
 
 const getCoords = (str) => {
