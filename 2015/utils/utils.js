@@ -1,5 +1,4 @@
 const fs = require("fs");
-const { resolve } = require("path");
 
 // Parse input and return string
 const parseInput = (filePath) => {
