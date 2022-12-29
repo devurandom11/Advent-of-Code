@@ -1,5 +1,6 @@
-// Solution 2
-const { parseInput } = require("../../utils/input-parser.js");
+//Solution 2
+const { parseInput, Timer } = require("../../utils/utils");
+const timer = new Timer();
 
 // Build starting grid
 const buildGrid = () => {
@@ -60,7 +61,8 @@ const lightEmUp = (input) => {
 };
 
 const input = parseInput("./input.txt");
-console.time("start");
+timer.start();
 const results = lightEmUp(input);
 console.log(countLights(results));
-console.timeEnd("start");
+timer.end();
+console.log(`Grid size: ${(50000 * 50000).toLocaleString("en-US")}`);
