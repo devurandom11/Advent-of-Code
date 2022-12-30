@@ -69,11 +69,9 @@ const processInput = (arr) => {
   return arr;
 };
 
-// console.dir(main(), { maxArrayLength: null });
-
 const newTest = () => {
   const graph = {
-    A: ["B", "C"],
+    A: ["B", "C", 135],
     B: ["D"],
     C: ["E", "F"],
     D: [],
@@ -96,4 +94,5 @@ const newTest = () => {
   console.log(findInputVertices(graph, "D"));
 };
 
-newTest();
+console.dir(main(), { maxArrayLength: null });
+// newTest();
