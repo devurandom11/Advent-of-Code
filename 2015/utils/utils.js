@@ -27,7 +27,7 @@ class Timer {
     console.log(
       `Elapsed time: ${(elapsedTime * 1e-6).toFixed(0)} ms\nElapsed time: ${(
         elapsedTime * 1e-9
-      ).toFixed(2)} Seconds`
+      ).toFixed(2)} Seconds\n`
     );
   }
 }
