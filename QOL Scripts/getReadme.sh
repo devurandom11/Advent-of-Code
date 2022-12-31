@@ -25,7 +25,7 @@ do
     do
         dayint=$(echo $day | awk -F'-' '{print $2}' | awk -F'/' '{print $1}' )
         cd $day
-        # sed and awk to strip html tags
+        # sed and awk to strip html tags and wrap in backticks "```" to respect original formatting
         curl $baseurl/${year}day/${dayint} -H "${sessionid}"  | sed 's/<\/*[^>]*>//g' | awk '/--- Day/{f=1} /You can also \[Shareon/{f=0} f {print}' | awk 'BEGIN{print "```"} {print} END{print "```"}' > README.md &&
         echo "Readme curled from $baseurl/${year}day/${dayint} complete!"
         cd ../
