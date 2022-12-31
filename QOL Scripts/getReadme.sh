@@ -14,12 +14,19 @@ do
         rm -rf README.md
         cd ../
     done
-    sleep 10;
+    cd ../
+done
+sleep 100;
+for year in $years;
+do
+    cd $year
+    days=$(ls -1d */)
     for day in $days;
     do
         dayint=$(echo $day | awk -F'-' '{print $2}' | awk -F'/' '{print $1}' )
         cd $day
-        curl $baseurl/${year}day/${dayint} -H "${sessionid}"  | sed 's/<\/*[^>]*>//g' | awk '/--- Day/{f=1} /You can also \[Shareon/{f=0} f' > README.md &&
+        # sed and awk to strip html tags
+        curl $baseurl/${year}day/${dayint} -H "${sessionid}"  | sed 's/<\/*[^>]*>//g' | awk '/--- Day/{f=1} /You can also \[Shareon/{f=0} f {print}' | awk 'BEGIN{print "```"} {print} END{print "```"}' > README.md &&
         echo "Readme curled from $baseurl/${year}day/${dayint} complete!"
         cd ../
         sleep .1;
