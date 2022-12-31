@@ -1,18 +1,8 @@
 
-
-
-
 Day 1 - Advent of Code 2015
-
-
-
-
 
 window.addEventListener('click', function(e,s,r){if(e.target.nodeName==='CODE'&&e.detail===3){s=window.getSelection();s.removeAllRanges();r=document.createRange();r.selectNodeContents(e.target);s.addRange(r);}});
 <!--
-
-
-
 
 Oh, hello!  Funny seeing you here.
 
@@ -37,62 +27,9 @@ If you'd like to hang out, I'm @ericwastl on Twitter.
 
 - Eric Wastl
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -->
 
-Advent of Code[About][Events][Shop][Settings][Log Out]devurandom11 12*&nbsp;&nbsp;{year=&gt;2015}[Calendar][AoC++][Sponsors][Leaderboard][Stats]
-
-
-
-
+Advent of Code[About][Events][Shop][Settings][Log Out]devurandom11 12*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/^2015$/[Calendar][AoC++][Sponsors][Leaderboard][Stats]
 
 --- Day 1: Not Quite Lisp ---Santa was hoping for a white Christmas, but his weather machine's "snow" function is powered by stars, and he's fresh out!  To save Christmas, he needs you to collect fifty stars by December 25th.
 Collect stars by helping Santa solve puzzles.  Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first.  Each puzzle grants one star. Good luck!
@@ -126,16 +63,10 @@ You can also [Shareon
   Mastodon</a
 >] this puzzle.
 
-
-
-
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+m=s.getElementsByTagName[o](0);a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 ga('create', 'UA-69522494-1', 'auto');
 ga('set', 'anonymizeIp', true);
 ga('send', 'pageview');
-
-
-
