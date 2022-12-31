@@ -8,22 +8,26 @@ for year in $years;
 do
     cd $year
     days=$(ls -1d */)
-    
+    for day in $days;
+    do
+        cd $day
+        rm -rf README.md
+        cd ../
+    done
+    sleep 10;
     for day in $days;
     do
         dayint=$(echo $day | awk -F'-' '{print $2}' | awk -F'/' '{print $1}' )
         cd $day
-        rm -rf README.md
-        curl $baseurl/${year}day/${dayint} -H "${sessionid}"  | sed 's/<\/*[^>]*>//g' > README.md &&
+        curl $baseurl/${year}day/${dayint} -H "${sessionid}"  | sed 's/<\/*[^>]*>//g' | awk '/--- Day/{f=1} /You can also \[Shareon/{f=0} f' > README.md &&
         echo "Readme curled from $baseurl/${year}day/${dayint} complete!"
         cd ../
-        sleep 1;
+        sleep .1;
     done
     
     echo "Done with year $year"
     echo "Pushing to github"
-    
-    sleep 1;
+    sleep .1;
     cd ../
 done
 
