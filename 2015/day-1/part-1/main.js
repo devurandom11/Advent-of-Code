@@ -1,6 +1,7 @@
-const { parseInput, Timer } = require("../../utils/utils");
-const timer = new Timer();
 // Solution 1
+const { pause, parseInput, Timer } = require("../../utils/utils");
+const timer = new Timer();
+
 const elevator = (inputText) => {
   // Create a lookup table
   const lookupTable = { "(": 1, ")": -1 };
