@@ -13,35 +13,33 @@ const getMemSize = (arr) => {
   const returnArr = [];
   arr.map((str) => {
     let reducedStr = "";
+    console.log("String: ", str);
     for (let i = 0; i < str.length; i++) {
-      console.log("original string: ", str);
+      // Check if escape character is found
+      if (str[i] === "\\") {
+        // Check conditions to know how to process
+        switch (str[i + 1]) {
+          case "\\":
+            // The next character is also an escape characer so we need to add it and skip a step in the loop to not process it again.
+            reducedStr += str[i + 1];
+            i += 1;
+            break;
 
-      switch (str[i]) {
-        case "\\":
-          console.log("escape sequence found", str[i]);
-          console.log("peeking...", str[i - 1], str[i], str[i + 1]);
-          break;
-        case "\\x":
-          console.log("escape sequence found", str[i]);
-          console.log("peeking...", str[i], str[i + 1], str[i + 2]);
-          break;
-        case "\\\\":
-          console.log("escape sequence found", str[i]);
-          console.lg(
-            "peeking...",
-            str[i - 2],
-            str[i - 1],
-            str[i],
-            str[i + 1],
-            str[i + 2]
-          );
-          break;
-        default:
-          console.log("no escape sequence found", str[i]);
-          break;
-      }
+          case "x":
+            // Process hex and skip next 3 abcde\x27abcde
+            const hex = `0x${str[i + 2]}${str[i + 3]}`;
+            reducedStr += String.fromCharCode(Number(hex));
+            i += 3;
+            // console.log;
+            break;
+        }
+      } else reducedStr += str[i];
     }
-    returnArr.push(reducedStr);
+    console.log("Final reduced string: ", reducedStr);
+    returnArr.push({
+      string: reducedStr.slice(1, reducedStr.length - 1),
+      length: reducedStr.slice(1, reducedStr.length - 1).length,
+    });
   });
   return returnArr;
 };
