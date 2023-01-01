@@ -6,22 +6,16 @@ class wire {
   constructor(name, source) {
     this.name = name;
     this.source = source;
-    this.destinations = [];
-  }
-
-  addDestination(destination) {
-    this.destinations.push(destination);
-  }
-
-  getValue(wiringDiagram) {
-    const source = this.source;
-    let sourceVal;
+    this.value = null;
   }
 }
 
-// Build the wiring diagram
-const buildDiagram = (arr) => {};
-
+// Define Wiring Diagram (Full board)
+class wiringDiagram {
+  constructor() {
+    this.wires = {};
+  }
+}
 // Main
 const main = () => {
   let result = -1;
