@@ -2,20 +2,23 @@ const { parseInput, pause, Timer } = require("../../utils/utils");
 const timer = new Timer();
 
 // Solution 2
-const elevator = async (inputText) => {
-  const lookupTable = { "(": 1, ")": -1 };
+const elevator = (str) => {
   let floor = 0;
-  steps = 0;
-  return inputText.split("").reduce((floor, steps) => {
-    return (floor += lookupTable[steps]);
+  let steps = 0;
+  const totalSteps = str.split("").reduce((steps, direction) => {
+    if (floor < 0) return steps;
+    if (direction === "(") floor += 1;
+    else floor -= 1;
+    return steps + 1;
   }, 0);
+  return totalSteps;
 };
 
-// Async main function for debugging
-const main = async () => {
-  const firstInput = parseInput("./input.txt");
+const main = () => {
+  const inputStr = parseInput("./input.txt");
   timer.start();
-  console.log(await elevator(firstInput));
+  const result = elevator(inputStr);
+  console.log(`\nThe result is: ${result}\n`);
   timer.end();
 };
 
