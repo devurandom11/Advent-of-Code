@@ -1,14 +1,6 @@
 const { parseInput, Timer } = require("../../utils/utils");
 const timer = new Timer();
 
-const main = () => {
-  const inputArr = parseInput("./input.txt").split("\n");
-  const mappedInput = mapInput(inputArr);
-  const processedInput = processInput(mappedInput);
-
-  return processedInput;
-};
-
 // Takes string input, capitalizes everything, maps values in object. Returns object of mapped values.
 const mapInput = (arr) => {
   const mappedArr = arr.map((str) => {
@@ -94,5 +86,12 @@ const newTest = () => {
   console.log(findInputVertices(graph, "D"));
 };
 
+const main = () => {
+  const inputArr = parseInput("./input.txt").split("\n");
+  const mappedInput = mapInput(inputArr);
+  const processedInput = processInput(mappedInput);
+
+  return processedInput;
+};
 console.dir(main(), { maxArrayLength: null });
 // newTest();
