@@ -61,31 +61,6 @@ const processInput = (arr) => {
   return arr;
 };
 
-const newTest = () => {
-  const graph = {
-    A: ["B", "C", 135],
-    B: ["D"],
-    C: ["E", "F"],
-    D: [],
-    E: [],
-    F: [],
-  };
-
-  function findInputVertices(graph, node) {
-    const inputVertices = [];
-
-    for (const v of Object.keys(graph)) {
-      if (graph[v].includes(node)) {
-        inputVertices.push(v);
-      }
-    }
-
-    return inputVertices;
-  }
-
-  console.log(findInputVertices(graph, "D"));
-};
-
 const main = () => {
   const inputArr = parseInput("./input.txt").split("\n");
   const mappedInput = mapInput(inputArr);
@@ -93,5 +68,5 @@ const main = () => {
 
   return processedInput;
 };
-console.dir(main(), { maxArrayLength: null });
-// newTest();
+// console.dir(main(), { maxArrayLength: null });
+const testing = newTest();
