@@ -1,7 +1,7 @@
 const { parseInput, Timer } = require("../../utils/utils");
 const timer = new Timer();
 
-// Takes string input, capitalizes everything, maps values in object. Returns object of mapped values.
+// Capitalize to avoid keyword collision; Extract name, value, and source(s); Return adjacency list.
 const mapInput = (arr) => {
   const mappedArr = arr.map((str) => {
     let capitalStr = "";
@@ -11,7 +11,7 @@ const mapInput = (arr) => {
     return capitalStr.split(" ");
   });
 
-  const mappedInput = [];
+  const mappedInput = {};
   for (let i = 0; i < mappedArr.length; i++) {
     // Create object with strings
     mappedInput.push({
@@ -34,39 +34,22 @@ const mapInput = (arr) => {
   return mappedInput;
 };
 
-// Iterate through array of wire objects and attempt to evaluate instructions. If instructions throw error, move to next object and repeat. When all objects are sucessfully processes, return the values of each wire
-const processInput = (arr) => {
-  for (const mappedInput of arr) {
-    // Process Inputs
-    switch (mappedInput.operator) {
-      case "AND":
-        console.log("AND!");
-        break;
-      case "OR":
-        console.log("OR!");
-        break;
-      case "NOT":
-        console.log("NOT!");
-        break;
-      case "LSHIFT":
-        console.log("LSHIFT!");
-        break;
-      case "RSHIFT":
-        console.log("RSHIT!");
-        break;
-      default:
-        break;
-    }
-  }
-  return arr;
+// Recursively search for node given adjacency list; Return target node object.
+const findWire = (graph, node) => {
+  return node;
 };
 
 const main = () => {
-  const inputArr = parseInput("./input.txt").split("\n");
-  const mappedInput = mapInput(inputArr);
-  const processedInput = processInput(mappedInput);
+  const inputArr = parseInput("./input.txt").trimEnd().split("\n");
+  const adjacencyList = mapInput(inputArr);
+  const resultWire = findWire(adjacencyList, "A");
+  const result = resultWire.value();
 
-  return processedInput;
+  return result;
 };
-// console.dir(main(), { maxArrayLength: null });
-const testing = newTest();
+
+// Main program
+
+timer.start();
+console.dir(main(), { maxArrayLength: null, depth: null });
+timer.end();
