@@ -15,6 +15,8 @@ const elevator = (str) => {
 };
 
 const main = () => {
+  // Test
+  // const inputStr = parseInput("./testinput.txt");
   const inputStr = parseInput("./input.txt");
   timer.start();
   const result = elevator(inputStr);
