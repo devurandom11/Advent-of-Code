@@ -4,35 +4,26 @@ const timer = new Timer();
 const getLiteralSize = (arr) => {
   let strLiteralSize = 0;
   for (const string of arr) {
-    strLiteralSize += string.length;
+    strLiteralSize += string.trimEnd().length;
   }
   return strLiteralSize;
 };
 
-const getMemSize = (arr) => {
-  let memSize = 0;
-  arr.map((str, index, arr) => {
-    return str;
-  });
-
-  return memSize;
-};
+const getMemSize = (arr) => {};
 
 const main = () => {
   // Test input
   const inputStr = parseInput("./testinput.txt");
   // const inputStr = parseInput("./input.txt");
   const inputArr = inputStr.split("\n");
-  const results = [];
-
+  const results = {};
   // Get string literal size
   const strLiteral = getLiteralSize(inputArr);
-
+  results["full"] = strLiteral;
   // Get memory size
   const memSize = getMemSize(inputArr);
-
+  results["mem"] = memSize;
   // Return results
-  results.push(strLiteral, memSize);
   return results;
 };
 
