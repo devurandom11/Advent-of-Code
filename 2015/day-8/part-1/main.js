@@ -3,9 +3,13 @@ const timer = new Timer();
 
 // Return full string length
 const getLiteralSize = (arr) => {
-  return arr.reduce((length, str) => {
-    return (length += str.length);
-  }, 0);
+  const fullString = [];
+  arr.map((string) => {
+    const str = {};
+    str[string] = string.length;
+    fullString.push(str);
+  });
+  return fullString;
 };
 
 // Parse for mem size
@@ -13,14 +17,13 @@ const getMemSize = (arr) => {
   const returnArr = [];
   arr.map((str) => {
     let reducedStr = "";
-    console.log("String: ", str);
     for (let i = 0; i < str.length; i++) {
       // Check if escape character is found
       if (str[i] === "\\" && str[i + 1] === "\\") {
         reducedStr += "\\";
         i += 1;
         continue;
-      } else if (str[i] === "\\") {
+      } else if (str[i] === "\\" && str[i + 1] !== "\\") {
         // Check conditions to know how to process
         switch (str[i + 1]) {
           case "x":
@@ -33,11 +36,10 @@ const getMemSize = (arr) => {
         }
       } else reducedStr += str[i];
     }
-    console.log("Final reduced string: ", reducedStr);
-    returnArr.push({
-      string: reducedStr.slice(1, reducedStr.length - 1),
-      length: reducedStr.slice(1, reducedStr.length - 1).length,
-    });
+    const length = reducedStr.slice(1, reducedStr.length - 1).length;
+    let objreturn = {};
+    objreturn[str] = length;
+    returnArr.push(objreturn);
   });
   return returnArr;
 };
@@ -51,15 +53,13 @@ const main = () => {
     .trim()
     .split("\n")
     .map((str) => str.trim());
-  const results = {};
+
   // Get string literal size
   const strLiteral = getLiteralSize(inputArr);
-  results["full"] = strLiteral;
   // Get memory size
   const memSize = getMemSize(inputArr);
-  results["mem"] = memSize;
   // Return results
-  return results;
+  const totalLength = strLiteral.reduce((total, str) => {}, 0);
 };
 
 // Main program
