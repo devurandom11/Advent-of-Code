@@ -1,38 +1,38 @@
 af AND ah -> ai
 NOT lk -> ll
-hz RSHIFT 1 -> is
+hz RSHIFT 2 -> is
 NOT go -> gp
 du OR dt -> dv
-x RSHIFT 5 -> aa
+x RSHIFT 6 -> aa
 at OR az -> ba
-eo LSHIFT 15 -> es
+eo LSHIFT 16 -> es
 ci OR ct -> cu
-b RSHIFT 5 -> f
+b RSHIFT 6 -> f
 fm OR fn -> fo
 NOT ag -> ah
 v OR w -> x
 g AND i -> j
-an LSHIFT 15 -> ar
-1 AND cx -> cy
+an LSHIFT 16 -> ar
+2 AND cx -> cy
 jq AND jw -> jy
-iu RSHIFT 5 -> ix
+iu RSHIFT 6 -> ix
 gl AND gm -> go
 NOT bw -> bx
-jp RSHIFT 3 -> jr
+jp RSHIFT 4 -> jr
 hg AND hh -> hj
 bv AND bx -> by
 er OR es -> et
 kl OR kr -> ks
-et RSHIFT 1 -> fm
+et RSHIFT 2 -> fm
 e AND f -> h
-u LSHIFT 1 -> ao
-he RSHIFT 1 -> hx
+u LSHIFT 2 -> ao
+he RSHIFT 2 -> hx
 eg AND ei -> ej
 bo AND bu -> bw
 dz OR ef -> eg
-dy RSHIFT 3 -> ea
+dy RSHIFT 4 -> ea
 gl OR gm -> gn
-da LSHIFT 1 -> du
+da LSHIFT 2 -> du
 au OR av -> aw
 gj OR gu -> gv
 eu OR fa -> fb
@@ -41,15 +41,15 @@ e OR f -> g
 NOT dm -> dn
 NOT l -> m
 aq OR ar -> as
-gj RSHIFT 5 -> gm
+gj RSHIFT 6 -> gm
 hm AND ho -> hp
-ge LSHIFT 15 -> gi
-jp RSHIFT 1 -> ki
+ge LSHIFT 16 -> gi
+jp RSHIFT 2 -> ki
 hg OR hh -> hi
-lc LSHIFT 1 -> lw
+lc LSHIFT 2 -> lw
 km OR kn -> ko
-eq LSHIFT 1 -> fk
-1 AND am -> an
+eq LSHIFT 2 -> fk
+2 AND am -> an
 gj RSHIFT 1 -> hc
 aj AND al -> am
 gj AND gu -> gw

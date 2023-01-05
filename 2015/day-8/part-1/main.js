@@ -59,7 +59,7 @@ const main = () => {
   // Get memory size
   const memSize = getMemSize(inputArr);
   // Return results
-  const totalLength = strLiteral.reduce((total, str) => {}, 0);
+  const totalLength = strLiteral.reduce((total, str) => (total += str), 0);
 };
 
 // Main program
