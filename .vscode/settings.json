@@ -1,6 +1,6 @@
 {
   "workbench.colorCustomizations": {
-    "editorCursor.foreground": "#bd00ff",
+    "editorCursor.foreground": "#fff200",
     "terminalCursor.foreground": "#d600ff"
   },
   "cSpell.words": ["objreturn", "testinput"]
