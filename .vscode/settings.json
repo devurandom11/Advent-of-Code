@@ -3,5 +3,6 @@
     "editorCursor.foreground": "#fff200",
     "terminalCursor.foreground": "#d600ff"
   },
-  "cSpell.words": ["objreturn", "testinput"]
+  "cSpell.words": ["objreturn", "testinput"],
+  "python.formatting.provider": "black"
 }
