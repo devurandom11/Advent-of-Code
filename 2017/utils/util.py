@@ -1,7 +1,10 @@
 import time as t
 
 
-def parse_input(inputStr: str) -> list:
+def parse_input(file_path: str) -> list:
+    with open(file_path, "r") as f:
+        inputStr: str = f.read()
+        f.close()
     return inputStr.strip().split("\n")
 
 
