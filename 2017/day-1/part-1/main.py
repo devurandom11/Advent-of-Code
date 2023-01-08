@@ -7,7 +7,7 @@ import util as ut
 def solve() -> int:
     with open("./input.txt") as f:
         input_str = f.read().strip()
-
+    f.close()
     # Initialize count of each digit to 0
     counts = [0] * 10
 

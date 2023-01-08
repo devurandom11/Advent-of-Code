@@ -5,9 +5,9 @@ import util as ut
 
 
 def solve() -> int:
-    with open("./input.txt") as f:
-        input_str = f.read().strip()
-
+    with open("./input.txt") as file:
+        input_str: list = file.readline().strip()
+    file.close()
     counts = [0] * 10
     halfway = len(input_str) // 2
 
