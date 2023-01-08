@@ -4,5 +4,6 @@
     "terminalCursor.foreground": "#d600ff"
   },
   "cSpell.words": ["objreturn", "testinput"],
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "black",
+  "python.analysis.extraPaths": ["./2017/utils"]
 }
