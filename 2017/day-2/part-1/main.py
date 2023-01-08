@@ -19,8 +19,7 @@ def solve() -> int:
     # Calculate checksum
     checksum = 0
     for row in matrix:
-        row.sort()
-        checksum += row[-1] - row[0]
+        checksum += max(row) - min(row)
 
     return checksum
 
