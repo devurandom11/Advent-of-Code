@@ -9,15 +9,15 @@ def solve() -> int:
         lines: list[str] = f.readlines()
         f.close()
     # Parse input into matrix
-    matrix = []
+    matrix: list[list[int]] = []
     for line in lines:
         # Split the line on tabs and remove any extra spaces
-        digits = [x.strip() for x in line.split("\t")]
+        digits: list[str] = [x.strip() for x in line.split("\t")]
         # Convert the digits to integers and append them to the matrix
         matrix.append([int(x) for x in digits])
 
     # Calculate checksum
-    checksum = 0
+    checksum: int = 0
     for row in matrix:
         checksum += max(row) - min(row)
 
