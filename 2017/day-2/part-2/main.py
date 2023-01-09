@@ -1,7 +1,7 @@
 import sys
 import time
 
-sys.path.insert(0, "../../utils")
+sys.path.insert(0, "../../utils/")
 import util as ut
 
 
@@ -18,25 +18,23 @@ def solve() -> int:
         matrix.append([int(x) for x in digits])
 
     # Calculate checksum
-    even_divisible: int = 0
-    for row in matrix:
-        print(f"Length of row: {len(row)}")
-        time.sleep(1)
-        for i in range(0, len(row)):
-            # time.sleep(1)
-            for j in range(0, len(row)):
-                if i == j:
-                    continue
-                if row[i] % row[j] == 0:
-                    even_divisible += row[i] / row[j]
-                    print(f"Found a match! {row[i]} : {row[j]}")
-                    print(
-                        f"This is a match because {row[i]} /divided by {row[j]} == {row[i]/row[j]}"
-                    )
-                    time.sleep(3)
-                continue
-        print("Moving to next row")
+    # Calculate checksum
 
+    even_divisible = 0
+    for row in matrix:
+        # Sort the row in ascending order
+        row.sort()
+        tracker = 0
+        j = len(row) - 1
+        # search with two pointers
+        while tracker < j:
+            for move in range(len(row) // 2):
+                if row[j] % row[move] == 0:
+                    even_divisible += row[j] // row[move]
+                    break
+            # Iterate one pointer and tracker
+            j -= 1
+            tracker += 1
     return even_divisible
 
 
