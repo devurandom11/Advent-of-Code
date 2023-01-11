@@ -16,6 +16,40 @@ const tokens = inputArr.map((line) => {
     : console.error(`Invalid instruction: ${line}`);
 });
 
+class Wire {
+  constructor(name) {
+    this.name = name;
+    this.inputs = [];
+    this.operation = null;
+  }
+
+  addInput(input) {
+    this.inputs.push(input);
+  }
+
+  setOperation(operation) {
+    this.operation = operation;
+  }
+
+  getValue() {
+    switch (this.operation) {
+      case "AND":
+        return AND(this.inputs[0].getValue(), this.inputs[1].getValue());
+      case "OR":
+        return OR(this.inputs[0].getValue(), this.inputs[1].getValue());
+      case "LSHIFT":
+        return LSHIFT(this.inputs[0].getValue(), this.inputs[1].getValue());
+      case "RSHIFT":
+        return RSHIFT(this.inputs[0].getValue(), this.inputs[1].getValue());
+      case "NOT":
+        return NOT(this.inputs[0].getValue());
+      case "ASSIGN":
+        return ASSIGN(this.inputs[0].getValue());
+      default:
+        console.error(`Invalid operation: ${this.operation}`);
+    }
+  }
+}
 // 16-bit version of bitwise operations
 const AND = (a, b) => a & b & 0xffff;
 const OR = (a, b) => a | (b & 0xffff);
