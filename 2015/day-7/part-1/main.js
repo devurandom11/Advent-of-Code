@@ -1,4 +1,4 @@
-const { parseInput, Timer } = require("../../utils/utils");
+const { parseInput } = require("../../utils/utils");
 
 const inputArr = parseInput("./input.txt").trim().split("\n");
 
@@ -16,6 +16,14 @@ const tokens = inputArr.map((line) => {
     : console.error(`Invalid instruction: ${line}`);
 });
 
+// 16-bit version of bitwise operations
+const AND = (a, b) => a & b & 0xffff;
+const OR = (a, b) => a | (b & 0xffff);
+const LSHIFT = (a, b) => (a << b) & 0xffff;
+const RSHIFT = (a, b) => (a >> b) & 0xffff;
+const NOT = (a) => ~a & 0xffff;
+const ASSIGN = (a) => a;
+
 class Wire {
   constructor(name) {
     this.name = name;
@@ -32,6 +40,9 @@ class Wire {
   }
 
   getValue() {
+    if (typeof this.inputs[0].getValue() === "string") {
+      return Number(this.inputs[0].getValue());
+    }
     switch (this.operation) {
       case "AND":
         return AND(this.inputs[0].getValue(), this.inputs[1].getValue());
@@ -44,16 +55,62 @@ class Wire {
       case "NOT":
         return NOT(this.inputs[0].getValue());
       case "ASSIGN":
-        return ASSIGN(this.inputs[0].getValue());
+        return this.inputs[0].getValue();
       default:
         console.error(`Invalid operation: ${this.operation}`);
     }
   }
 }
-// 16-bit version of bitwise operations
-const AND = (a, b) => a & b & 0xffff;
-const OR = (a, b) => a | (b & 0xffff);
-const LSHIFT = (a, b) => (a << b) & 0xffff;
-const RSHIFT = (a, b) => (a >> b) & 0xffff;
-const NOT = (a) => ~a & 0xffff;
-const ASSIGN = (a) => a;
+
+function buildTree(target) {
+  const wires = {};
+  tokens.forEach((token) => {
+    let value;
+    if (Array.isArray(token.value)) {
+      value = wires[token.value[0]] =
+        wires[token.value[0]] || new Wire(token.value[0]);
+      value.addInput(
+        (wires[token.value[1]] =
+          wires[token.value[1]] || new Wire(token.value[1]))
+      );
+    } else {
+      value = wires[token.value] = wires[token.value] || new Wire(token.value);
+    }
+    const wire = (wires[token.target] =
+      wires[token.target] || new Wire(token.target));
+    wire.addInput(value);
+    wire.setOperation(token.instruction);
+  });
+
+  return wires[target].getValue();
+}
+
+function buildTree(target) {
+  const wires = {};
+  tokens.forEach((token) => {
+    let value;
+    if (Array.isArray(token.value)) {
+      value = wires[token.value[0]] =
+        wires[token.value[0]] || new Wire(token.value[0]);
+      value.addInput(
+        (wires[token.value[1]] =
+          wires[token.value[1]] || new Wire(token.value[1]))
+      );
+    } else {
+      value = wires[token.value] = wires[token.value] || new Wire(token.value);
+    }
+    if (token.instruction === "->") {
+      token.instruction = "ASSIGN";
+    }
+    const wire = (wires[token.target] =
+      wires[token.target] || new Wire(token.target));
+    wire.addInput(value);
+    wire.setOperation(token.instruction);
+  });
+
+  return wires[target].getValue();
+}
+
+console.log(buildTree("x"));
+console.log(buildTree("y"));
+console.log(buildTree("i"));
