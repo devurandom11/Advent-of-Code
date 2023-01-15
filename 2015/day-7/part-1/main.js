@@ -12,19 +12,71 @@ const inputArr = parseInput("./testinput.txt")
     return obj;
   }, {});
 
-const wireMap = new Map();
+// Build map of wires
+const wires = new Map();
 for (const key in inputArr) {
-  let [leftVal, operator, rightVal] = inputArr[key];
-  if (leftVal === "NOT") {
-    leftVal = undefined;
+  let [left, operator, right] = inputArr[key];
+  if (left === "NOT") {
+    left = undefined;
     operator = "NOT";
-    rightVal = inputArr[key][1];
+    right = inputArr[key][1];
   }
-  wireMap.set(key, { leftVal, operator, rightVal });
+  wires.set(key, { left, operator, right });
 }
 
-wireMap.forEach((value, key, map) => {
+// Convert values to numbers
+wires.forEach((value) => {
   Object.keys(value).forEach((key) => {
     if (parseInt(value[key])) value[key] = parseInt(value[key]);
   });
 });
+
+const buildMap = (wires, target) => {
+  let node = { name: target };
+  // Find leaf node base case
+  if (
+    !wires.get(target)["operator"] &&
+    (!wires.get(target)["left"] || !wires.get(target)["right"])
+  ) {
+    if (wires.get(target)["left"]) {
+      node.left = wires.get(target)["left"];
+    } else {
+      node.right = wires.get(target)["right"];
+    }
+    return node;
+  }
+
+  // Handle different operators
+  switch (wires.get(target)["operator"]) {
+    case "NOT":
+      console.log("NOT");
+      break;
+    case "OR":
+      console.log("OR");
+      break;
+    case "AND":
+      console.log("AND");
+      break;
+    case "LSHIFT":
+      console.log("LSHIFT");
+      break;
+    case "RSHIFT":
+      console.log("RSHIFT");
+      break;
+    default:
+      console.log("SOME ERROR OCCURRED");
+      break;
+  }
+
+  return "ERROR";
+};
+
+// const getWire = (wire) => {
+//   let { leftVal, operator, rightVal } = wireMap.get(wire);
+//   console.log(
+//     `Wire: ${wire}\nLeft Value: ${leftVal}\nRight Value: ${rightVal}\nOperator: ${operator}`
+//   );
+// };
+
+console.log(wires);
+console.log(buildMap(wires, "I"));
