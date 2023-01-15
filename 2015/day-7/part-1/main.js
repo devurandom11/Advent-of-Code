@@ -22,3 +22,9 @@ for (const key in inputArr) {
   }
   wireMap.set(key, { leftVal, operator, rightVal });
 }
+
+wireMap.forEach((value, key, map) => {
+  Object.keys(value).forEach((key) => {
+    if (parseInt(value[key])) value[key] = parseInt(value[key]);
+  });
+});
