@@ -2,7 +2,7 @@ const { Timer, parseInput } = require("../../utils/utils.js");
 const timer = new Timer();
 
 // Get array[0] = instructions and array[1] = targetWire
-const inputArr = parseInput("./testinput.txt")
+const inputArr = parseInput("input.txt", "\n")
   .trim()
   .toUpperCase()
   .split("\n")
@@ -77,6 +77,9 @@ const buildMap = (wires, target) => {
 //     `Wire: ${wire}\nLeft Value: ${leftVal}\nRight Value: ${rightVal}\nOperator: ${operator}`
 //   );
 // };
-
+timer.start();
 console.log(wires);
-console.log(buildMap(wires, "I"));
+console.log(buildMap(wires, "X"));
+console.log(buildMap(wires, "Y"));
+console.dir(buildMap(wires, "X"), { depth: null });
+timer.end();
