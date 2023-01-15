@@ -31,9 +31,16 @@ wires.forEach((value) => {
   });
 });
 
+const memo = new Set();
+
 const buildMap = (wires, target) => {
+  if (!wires.has(target)) return;
+  if (memo.has(target)) return; // check if the node has already been processed
+
   if (typeof target === "number") return target;
   let node = { name: target };
+  memo.add(target); // add the node to the memo set
+
   // Find leaf node base case
   if (
     !wires.get(target)["operator"] &&
@@ -61,15 +68,8 @@ const buildMap = (wires, target) => {
   return node;
 };
 
-// const getWire = (wire) => {
-//   let { leftVal, operator, rightVal } = wireMap.get(wire);
-//   console.log(
-//     `Wire: ${wire}\nLeft Value: ${leftVal}\nRight Value: ${rightVal}\nOperator: ${operator}`
-//   );
-// };
 timer.start();
-console.log(wires);
-console.log(buildMap(wires, "X"));
-console.log(buildMap(wires, "Y"));
-console.dir(buildMap(wires, "X"), { depth: null });
+// console.log(wires);
+console.dir(buildMap(wires, "X"), { depth: 8 });
+
 timer.end();
