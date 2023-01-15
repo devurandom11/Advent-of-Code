@@ -32,6 +32,7 @@ wires.forEach((value) => {
 });
 
 const buildMap = (wires, target) => {
+  if (typeof target === "number") return target;
   let node = { name: target };
   // Find leaf node base case
   if (
@@ -39,36 +40,25 @@ const buildMap = (wires, target) => {
     (!wires.get(target)["left"] || !wires.get(target)["right"])
   ) {
     if (wires.get(target)["left"]) {
-      node.left = wires.get(target)["left"];
+      node.left = buildMap(wires, wires.get(target)["left"]);
     } else {
-      node.right = wires.get(target)["right"];
+      node.right = buildMap(wires, wires.get(target)["right"]);
     }
     return node;
   }
-
   // Handle different operators
   switch (wires.get(target)["operator"]) {
     case "NOT":
-      console.log("NOT");
-      break;
-    case "OR":
-      console.log("OR");
-      break;
-    case "AND":
-      console.log("AND");
-      break;
-    case "LSHIFT":
-      console.log("LSHIFT");
-      break;
-    case "RSHIFT":
-      console.log("RSHIFT");
+      node.operator = "NOT";
+      node.right = buildMap(wires, wires.get(target)["right"]);
       break;
     default:
-      console.log("SOME ERROR OCCURRED");
+      node.operator = wires.get(target)["operator"];
+      node.right = buildMap(wires, wires.get(target)["right"]);
+      node.left = buildMap(wires, wires.get(target)["left"]);
       break;
   }
-
-  return "ERROR";
+  return node;
 };
 
 // const getWire = (wire) => {
