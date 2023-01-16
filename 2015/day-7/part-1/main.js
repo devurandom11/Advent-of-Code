@@ -2,7 +2,7 @@ const { Timer, parseInput } = require("../../utils/utils.js");
 const timer = new Timer();
 
 // Get array[0] = instructions and array[1] = targetWire
-const inputArr = parseInput("testinput.txt", "\n")
+const inputArr = parseInput("input.txt", "\n")
   .trim()
   .toUpperCase()
   .split("\n")
@@ -48,48 +48,53 @@ wires.forEach((key) => {
   }
 });
 
-const buildTree = (wires, targetWire) => {
+const buildTree = (wires, targetWire, memo = new Map()) => {
   if (!wires.get(targetWire)) {
     return;
   }
+  if (memo.has(targetWire)) {
+    return memo.get(targetWire);
+  }
+
   // Base Case
   if (
     !isNaN(wires.get(targetWire).left) &&
     wires.get(targetWire).operator === "ASSIGN"
   ) {
+    memo.set(targetWire, wires.get(targetWire).left);
     return wires.get(targetWire).left;
   }
 
   //   // Recursive Case
   switch (wires.get(targetWire).operator) {
     case "ASSIGN":
-      return buildTree(wires, wires.get(targetWire).left);
+      return buildTree(wires, wires.get(targetWire).left, memo);
     case "NOT":
-      return ~buildTree(wires, wires.get(targetWire).right);
+      return ~buildTree(wires, wires.get(targetWire).right, memo);
     case "AND":
       return (
-        buildTree(wires, wires.get(targetWire).left) &
-        buildTree(wires, wires.get(targetWire).right)
+        buildTree(wires, wires.get(targetWire).left, memo) &
+        buildTree(wires, wires.get(targetWire).right, memo)
       );
     case "OR":
       return (
-        buildTree(wires, wires.get(targetWire).left) |
-        buildTree(wires, wires.get(targetWire).right)
+        buildTree(wires, wires.get(targetWire).left, memo) |
+        buildTree(wires, wires.get(targetWire).right, memo)
       );
     case "LSHIFT":
       return (
-        buildTree(wires, wires.get(targetWire).left) <<
-        buildTree(wires, wires.get(targetWire).right)
+        buildTree(wires, wires.get(targetWire).left, memo) <<
+        buildTree(wires, wires.get(targetWire).right, memo)
       );
     case "RSHIFT":
       return (
-        buildTree(wires, wires.get(targetWire).left) >>
-        buildTree(wires, wires.get(targetWire).right)
+        buildTree(wires, wires.get(targetWire).left, memo) >>
+        buildTree(wires, wires.get(targetWire).right, memo)
       );
   }
 };
 
-// console.log(wires);
+console.log(wires);
 // trees["X"] = buildTree(wires, "X");
 // trees["Y"] = buildTree(wires, "Y");
 // trees["D"] = buildTree(wires, "D");
@@ -99,11 +104,4 @@ const buildTree = (wires, targetWire) => {
 // trees["H"] = buildTree(wires, "H");
 // trees["I"] = buildTree(wires, "I");
 
-console.log(buildTree(wires, "X"));
-console.log(buildTree(wires, "Y"));
-console.log(buildTree(wires, "D"));
-console.log(buildTree(wires, "E"));
-console.log(buildTree(wires, "F"));
-console.log(buildTree(wires, "G"));
-console.log(buildTree(wires, "H"));
-console.log(buildTree(wires, "I"));
+console.log(buildTree(wires, "A"));
