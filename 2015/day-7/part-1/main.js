@@ -12,58 +12,98 @@ const inputArr = parseInput("testinput.txt", "\n")
     return obj;
   }, {});
 
-// console.log(inputArr);
 // Build map of wires
 const wires = new Map();
 for (const key in inputArr) {
   let [left, operator, right] = inputArr[key];
-  if (parseInt(left)) {
-    left = parseInt(left);
-    operator = "ASSIGN";
-    right = null;
-  } else if (left === "NOT") {
+
+  // Case with all values filled
+  if (left && operator && right) {
+    wires.set(key, { left, operator, right });
+    continue;
+  }
+
+  // Case with NOT
+  if (left === "NOT") {
     left = null;
     operator = "NOT";
     right = inputArr[key][1];
+    wires.set(key, { left, operator, right });
+    continue;
   }
+
+  // Case for assignment
+  left = inputArr[key][0];
+  operator = "ASSIGN";
+  right = undefined;
   wires.set(key, { left, operator, right });
 }
 
-// console.log(wires);
-
-// Convert values to numbers
-wires.forEach((value) => {
-  Object.keys(value).forEach((key) => {
-    if (parseInt(value[key])) value[key] = parseInt(value[key]);
-  });
+// Convert string to number
+wires.forEach((key) => {
+  for (let value in key) {
+    if (parseInt(key[value]) || key[value] === "0") {
+      key[value] = parseInt(key[value]);
+    }
+  }
 });
 
-const wiresObject = Object.fromEntries(wires.entries());
-
-// console.log(wiresObject);
-
-function buildTree(tree, root) {
-  const memo = {};
-  if (memo[root]) return memo[root];
-  if (!tree[root]) return null;
-  let root_node = { value: root, left: null, right: null, operator: null };
-  if (tree[root].operator === "ASSIGN" || !tree[root].operator) {
-    if (typeof tree[root].left === "string") {
-      root_node.left = buildTree(tree, tree[root].left);
-    } else {
-      root_node.left = tree[root].left;
-    }
-    root_node.operator = "ASSIGN";
-    memo[root] = root_node;
-    return root_node;
-  } else {
-    root_node.left = buildTree(tree, tree[root].left);
-    root_node.right = buildTree(tree, tree[root].right);
-    root_node.operator = tree[root].operator;
-    memo[root] = root_node;
-    return root_node;
+const buildTree = (wires, targetWire) => {
+  if (!wires.get(targetWire)) {
+    return;
   }
-}
+  // Base Case
+  if (
+    !isNaN(wires.get(targetWire).left) &&
+    wires.get(targetWire).operator === "ASSIGN"
+  ) {
+    return wires.get(targetWire).left;
+  }
 
-const tree = buildTree(wiresObject, "X");
-console.dir(tree, { depth: null });
+  //   // Recursive Case
+  switch (wires.get(targetWire).operator) {
+    case "ASSIGN":
+      return buildTree(wires, wires.get(targetWire).left);
+    case "NOT":
+      return ~buildTree(wires, wires.get(targetWire).right);
+    case "AND":
+      return (
+        buildTree(wires, wires.get(targetWire).left) &
+        buildTree(wires, wires.get(targetWire).right)
+      );
+    case "OR":
+      return (
+        buildTree(wires, wires.get(targetWire).left) |
+        buildTree(wires, wires.get(targetWire).right)
+      );
+    case "LSHIFT":
+      return (
+        buildTree(wires, wires.get(targetWire).left) <<
+        buildTree(wires, wires.get(targetWire).right)
+      );
+    case "RSHIFT":
+      return (
+        buildTree(wires, wires.get(targetWire).left) >>
+        buildTree(wires, wires.get(targetWire).right)
+      );
+  }
+};
+
+// console.log(wires);
+// trees["X"] = buildTree(wires, "X");
+// trees["Y"] = buildTree(wires, "Y");
+// trees["D"] = buildTree(wires, "D");
+// trees["E"] = buildTree(wires, "E");
+// trees["F"] = buildTree(wires, "F");
+// trees["G"] = buildTree(wires, "G");
+// trees["H"] = buildTree(wires, "H");
+// trees["I"] = buildTree(wires, "I");
+
+console.log(buildTree(wires, "X"));
+console.log(buildTree(wires, "Y"));
+console.log(buildTree(wires, "D"));
+console.log(buildTree(wires, "E"));
+console.log(buildTree(wires, "F"));
+console.log(buildTree(wires, "G"));
+console.log(buildTree(wires, "H"));
+console.log(buildTree(wires, "I"));
