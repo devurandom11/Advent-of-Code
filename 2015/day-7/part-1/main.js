@@ -2,7 +2,7 @@ const { Timer, parseInput } = require("../../utils/utils.js");
 const timer = new Timer();
 
 // Get array[0] = instructions and array[1] = targetWire
-const inputArr = parseInput("input.txt", "\n")
+const inputArr = parseInput("testinput.txt", "\n")
   .trim()
   .toUpperCase()
   .split("\n")
@@ -12,17 +12,24 @@ const inputArr = parseInput("input.txt", "\n")
     return obj;
   }, {});
 
+// console.log(inputArr);
 // Build map of wires
 const wires = new Map();
 for (const key in inputArr) {
   let [left, operator, right] = inputArr[key];
-  if (left === "NOT") {
-    left = undefined;
+  if (parseInt(left)) {
+    left = parseInt(left);
+    operator = "ASSIGN";
+    right = null;
+  } else if (left === "NOT") {
+    left = null;
     operator = "NOT";
     right = inputArr[key][1];
   }
   wires.set(key, { left, operator, right });
 }
+
+// console.log(wires);
 
 // Convert values to numbers
 wires.forEach((value) => {
@@ -31,45 +38,32 @@ wires.forEach((value) => {
   });
 });
 
-const memo = new Set();
+const wiresObject = Object.fromEntries(wires.entries());
 
-const buildMap = (wires, target) => {
-  if (!wires.has(target)) return;
-  if (memo.has(target)) return; // check if the node has already been processed
+// console.log(wiresObject);
 
-  if (typeof target === "number") return target;
-  let node = { name: target };
-  memo.add(target); // add the node to the memo set
-
-  // Find leaf node base case
-  if (
-    !wires.get(target)["operator"] &&
-    (!wires.get(target)["left"] || !wires.get(target)["right"])
-  ) {
-    if (wires.get(target)["left"]) {
-      node.left = buildMap(wires, wires.get(target)["left"]);
+function buildTree(tree, root) {
+  const memo = {};
+  if (memo[root]) return memo[root];
+  if (!tree[root]) return null;
+  let root_node = { value: root, left: null, right: null, operator: null };
+  if (tree[root].operator === "ASSIGN" || !tree[root].operator) {
+    if (typeof tree[root].left === "string") {
+      root_node.left = buildTree(tree, tree[root].left);
     } else {
-      node.right = buildMap(wires, wires.get(target)["right"]);
+      root_node.left = tree[root].left;
     }
-    return node;
+    root_node.operator = "ASSIGN";
+    memo[root] = root_node;
+    return root_node;
+  } else {
+    root_node.left = buildTree(tree, tree[root].left);
+    root_node.right = buildTree(tree, tree[root].right);
+    root_node.operator = tree[root].operator;
+    memo[root] = root_node;
+    return root_node;
   }
-  // Handle different operators
-  switch (wires.get(target)["operator"]) {
-    case "NOT":
-      node.operator = "NOT";
-      node.right = buildMap(wires, wires.get(target)["right"]);
-      break;
-    default:
-      node.operator = wires.get(target)["operator"];
-      node.right = buildMap(wires, wires.get(target)["right"]);
-      node.left = buildMap(wires, wires.get(target)["left"]);
-      break;
-  }
-  return node;
-};
+}
 
-timer.start();
-// console.log(wires);
-console.dir(buildMap(wires, "X"), { depth: 8 });
-
-timer.end();
+const tree = buildTree(wiresObject, "X");
+console.dir(tree, { depth: null });
