@@ -2,11 +2,10 @@
   "name": "aoc-2021",
   "version": "1.0.0",
   "description": "Advent of Code 2021 in Typescript",
-  "main": "main.js",
+  "main": "",
   "type": "module",
   "scripts": {
-    "watch": "tsc -w",
-    "monitor": "nodemon ./main.js"
+    "watch": "tsc -w"
   },
   "author": "Mike Crawford",
   "license": "MIT",
