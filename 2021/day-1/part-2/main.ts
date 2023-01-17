@@ -1,5 +1,5 @@
 import fs from "fs";
-const inputType: { main: string; test: string } = {
+const inputType: { [key: string]: string } = {
   main: "input.txt",
   test: "testinput.txt",
 };

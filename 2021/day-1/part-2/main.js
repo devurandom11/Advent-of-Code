@@ -20,16 +20,24 @@ var tracker = {
 inputArr.reduce(function (tracker, curr, index) {
   if (index === 0) {
     console.log("We are starting at ".concat(curr));
-  } else if (curr > inputArr[index - 1]) {
-    tracker.ascending++;
-    console.log(
-      "We are ascending from ".concat(inputArr[index - 1], " to ").concat(curr)
-    );
-  } else if (curr < inputArr[index - 1]) {
-    tracker.descending++;
-    console.log(
-      "We are descending from ".concat(inputArr[index - 1], " to ").concat(curr)
-    );
+  } else if (index === inputArr.length - 1 || index === inputArr.length - 2) {
+    console.log("We are ending at ".concat(inputArr[inputArr.length - 3]));
+  } else {
+    if (curr > inputArr[index - 1]) {
+      tracker.ascending++;
+      console.log(
+        "We are ascending from "
+          .concat(inputArr[index - 1], " to ")
+          .concat(curr)
+      );
+    } else if (curr < inputArr[index - 1]) {
+      tracker.descending++;
+      console.log(
+        "We are descending from "
+          .concat(inputArr[index - 1], " to ")
+          .concat(curr)
+      );
+    }
   }
   return tracker;
 }, tracker);
