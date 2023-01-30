@@ -2,8 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <map>
+
+const int ALPHABET_SIZE = 26;
 
 auto main() -> int
 {
@@ -17,17 +17,18 @@ auto main() -> int
     {
         encrypted_name = line.substr(0, line.find_last_of('-'));
         sector_id = std::stoi(line.substr(line.find_last_of('-') + 1, line.find_last_of('[') - line.find_last_of('-') - 1));
+        decrypted_name.resize(encrypted_name.size());
 
         // Decrypt the name
-        for (auto letter : encrypted_name)
+        for (int i = 0; i < encrypted_name.size(); i++)
         {
-            if (letter == '-')
+            if (encrypted_name[i] == '-')
             {
-                decrypted_name += ' ';
+                decrypted_name[i] = ' ';
             }
             else
             {
-                decrypted_name += (letter - 'a' + sector_id) % 26 + 'a';
+                decrypted_name[i] = (encrypted_name[i] - 'a' + sector_id) % ALPHABET_SIZE + 'a';
             }
         }
 
@@ -38,8 +39,6 @@ auto main() -> int
             std::cout << "Encrypted name: " << encrypted_name << std::endl;
             std::cout << "Decrypted name: " << decrypted_name << std::endl;
         }
-
-        decrypted_name.clear();
     }
 
     input_file.close();

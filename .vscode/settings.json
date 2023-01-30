@@ -4,5 +4,9 @@
     "terminalCursor.foreground": "#d600ff"
   },
   "python.formatting.provider": "black",
-  "python.analysis.extraPaths": ["./2017/utils"]
+  "python.analysis.extraPaths": ["./2017/utils"],
+  "files.associations": {
+    "*.txt": "plaintext",
+    "xstring": "cpp"
+  }
 }
