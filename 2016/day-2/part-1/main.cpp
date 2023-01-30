@@ -3,59 +3,44 @@
 #include <string>
 #include <vector>
 
+const auto numberMap = std::vector<std::vector<int>>{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
 int main()
 {
-    std::vector<std::vector<int>> numberMap = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-    std::string file;
-    std::fstream input("input.txt");
+    std::ifstream input("input.txt");
     std::vector<std::vector<char>> inputVector;
-    std::vector<char> tempVector;
 
-    while (std::getline(input, file))
+    for (std::string line; std::getline(input, line);)
     {
-        for (int i = 0; i < file.length(); i++)
-        {
-            tempVector.push_back(file[i]);
-        }
-        inputVector.push_back(tempVector);
-        tempVector.clear();
+        inputVector.push_back({line.begin(), line.end()});
     }
 
     int x = 1;
     int y = 1;
     int number = 0;
 
-    for (int i = 0; i < inputVector.size(); i++)
+    for (const auto &line : inputVector)
     {
-        for (int j = 0; j < inputVector[i].size(); j++)
+        for (const auto &c : line)
         {
-            if (inputVector[i][j] == 'U')
+            switch (c)
             {
+            case 'U':
                 if (y > 0)
-                {
                     y--;
-                }
-            }
-            else if (inputVector[i][j] == 'D')
-            {
+                break;
+            case 'D':
                 if (y < 2)
-                {
                     y++;
-                }
-            }
-            else if (inputVector[i][j] == 'L')
-            {
+                break;
+            case 'L':
                 if (x > 0)
-                {
                     x--;
-                }
-            }
-            else if (inputVector[i][j] == 'R')
-            {
+                break;
+            case 'R':
                 if (x < 2)
-                {
                     x++;
-                }
+                break;
             }
         }
         number = numberMap[y][x];
@@ -64,6 +49,5 @@ int main()
 
     std::cout << std::endl;
 
-    std::cin >> std::ws;
     return 0;
 }
