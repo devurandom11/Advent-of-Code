@@ -31,10 +31,9 @@ auto main() -> int
             }
         }
 
-        // Check if the name contains "north"
+        // Check if the name contains "north" and print results
         if (decrypted_name.find("north") != std::string::npos)
         {
-            // If it does, print the sector id, encrypted name, and decrypted name
             std::cout << "Sector ID: " << sector_id << std::endl;
             std::cout << "Encrypted name: " << encrypted_name << std::endl;
             std::cout << "Decrypted name: " << decrypted_name << std::endl;
