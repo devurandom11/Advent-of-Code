@@ -52,6 +52,7 @@ auto main() -> int
             total += std::stoi(sector_id);
         }
     }
+    input_file.close();
 
     // Print the total
     std::cout << "Total sector sum: " << total << std::endl;
