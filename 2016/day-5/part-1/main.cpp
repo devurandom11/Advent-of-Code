@@ -15,6 +15,8 @@ auto main() -> int
     std::getline(file, input);
     int append = 0;
 
+    std::cout << "\033[2J\033[1;1H"; // Clear console
+
     while (password.length() < 8)
     {
         std::string temp = input + std::to_string(append);
@@ -47,14 +49,15 @@ auto main() -> int
         if (firstFiveZeros)
         {
             password += hex[5];
-            std::cout << "Found: " << hex[5] << " at ";
-            std::cout << std::dec << append << std::endl;
-            std::cout << "Current Password: " << password << std::endl;
         }
         append++;
+        std::cout << "\r" << std::string(password) << hex.substr(password.length(), hex.length() - password.length()) << std::flush;
     }
 
-    std::cout << "Password: " << password << std::endl;
+    std::cout << "\033[2J\033[1;1H"; // Clear console
+    std::cout
+        << "\n"
+        << "Password: " << password << std::endl;
     std::cout << "Press ENTER to exit..." << std::endl;
     std::cin.get();
     return 0;
