@@ -8,7 +8,7 @@
 auto main() -> int
 {
     std::string input;
-    std::ifstream file("testinput.txt");
+    std::ifstream file("input.txt");
     unsigned char result[EVP_MAX_MD_SIZE];
     unsigned int result_len;
     std::string password = "--------";
