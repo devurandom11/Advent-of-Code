@@ -51,7 +51,7 @@ auto main() -> int
             password += hex[5];
         }
         append++;
-        std::cout << "\r" << std::string(password) << hex.substr(password.length(), hex.length() - password.length()) << std::flush;
+        std::cout << "\r" << std::string(password) << hex.substr(password.length(), (hex.length() - hex.length() + 8) - password.length()) << std::flush;
     }
 
     std::cout << "\033[2J\033[1;1H"; // Clear console
