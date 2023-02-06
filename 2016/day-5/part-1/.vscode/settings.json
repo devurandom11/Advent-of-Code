@@ -1,22 +1,10 @@
 {
-  "workbench.colorCustomizations": {
-    "editorCursor.foreground": "#fff200",
-    "terminalCursor.foreground": "#d600ff"
-  },
-  "python.formatting.provider": "black",
-  "python.analysis.extraPaths": [
-    "./2017/utils"
-  ],
-  "files.associations": {
-    "*.txt": "plaintext",
-    "xstring": "cpp"
-  },
-  "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
   "C_Cpp_Runner.cStandard": "",
   "C_Cpp_Runner.cppStandard": "",
+  "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.useMsvc": false,
   "C_Cpp_Runner.warnings": [
     "-Wall",
