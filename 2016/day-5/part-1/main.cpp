@@ -34,8 +34,11 @@ void printInLoop(string password, string hex)
 {
     cout << "\r"
          << "Cracking Hash... "
+         << "\033[1;32m"
          << string(password)
+         << "\033[0m"
          << hex.substr(password.length(), (8) - password.length())
+         << " | " << hex
          << flush;
 }
 
