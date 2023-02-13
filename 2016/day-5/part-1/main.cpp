@@ -4,22 +4,53 @@
 #include <iomanip>
 #include <fstream>
 
+using namespace std;
+
+bool firstFiveZeros(string hex)
+{
+    for (auto i = 0; i < 5; i++)
+    {
+        if (hex[i] != '0')
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+void makeHex(unsigned char *result, unsigned int result_len, string &hex)
+{
+    stringstream hexStream;
+    hexStream << hex << setfill('0');
+
+    for (auto i = 0; i < result_len; i++)
+    {
+        hexStream << setw(2) << static_cast<int>(result[i]);
+    }
+    hex = hexStream.str();
+}
+
+void printInLoop(string password, string hex)
+{
+    cout << "\r" << string(password) << hex.substr(password.length(), (hex.length() - hex.length() + 8) - password.length()) << flush;
+}
+
 auto main() -> int
 {
-    std::string input;
-    std::ifstream file("input.txt");
+    string input;
+    ifstream file("input.txt");
     unsigned char result[EVP_MAX_MD_SIZE];
     unsigned int result_len;
-    std::string password = "";
-
-    std::getline(file, input);
+    string password = "";
     int append = 0;
+    string temp;
 
-    std::cout << "\033[2J\033[1;1H"; // Clear console
+    getline(file, input);
+    cout << "\033[2J\033[1;1H"; // Clear console
 
-    while (password.length() < 8)
+    while (password.size() < 8)
     {
-        std::string temp = input + std::to_string(append);
+        temp = input + to_string(append);
 
         EVP_MD_CTX *ctx = EVP_MD_CTX_new();
         EVP_DigestInit_ex(ctx, EVP_md5(), NULL);
@@ -27,38 +58,18 @@ auto main() -> int
         EVP_DigestFinal_ex(ctx, result, &result_len);
         EVP_MD_CTX_free(ctx);
 
-        std::stringstream hexStream;
-        hexStream << std::hex << std::setfill('0');
+        string hex;
+        makeHex(result, result_len, hex);
 
-        for (auto i = 0; i < result_len; i++)
-        {
-            hexStream << std::setw(2) << static_cast<int>(result[i]);
-        }
-        std::string hex = hexStream.str();
-
-        bool firstFiveZeros = true;
-        for (auto i = 0; i < 5; i++)
-        {
-            if (hex[i] != '0')
-            {
-                firstFiveZeros = false;
-                break;
-            }
-        }
-
-        if (firstFiveZeros)
-        {
+        if (firstFiveZeros(hex))
             password += hex[5];
-        }
         append++;
-        std::cout << "\r" << std::string(password) << hex.substr(password.length(), (hex.length() - hex.length() + 8) - password.length()) << std::flush;
+        printInLoop(password, hex);
     }
 
-    std::cout << "\033[2J\033[1;1H"; // Clear console
-    std::cout
-        << "\n"
-        << "Password: " << password << std::endl;
-    std::cout << "Press ENTER to exit..." << std::endl;
-    std::cin.get();
+    cout << "\033[2J\033[1;1H" << endl; // Clear console
+    cout << "Password: " << password << endl;
+    cout << "Press ENTER to exit..." << endl;
+    cin.get();
     return 0;
 }
