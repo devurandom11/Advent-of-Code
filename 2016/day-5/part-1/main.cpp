@@ -32,7 +32,11 @@ void makeHex(unsigned char *result, unsigned int result_len, string &hex)
 
 void printInLoop(string password, string hex)
 {
-    cout << "\r" << string(password) << hex.substr(password.length(), (hex.length() - hex.length() + 8) - password.length()) << flush;
+    cout << "\r"
+         << "Cracking Hash... "
+         << string(password)
+         << hex.substr(password.length(), (8) - password.length())
+         << flush;
 }
 
 auto main() -> int
