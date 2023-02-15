@@ -1,55 +1,47 @@
 #include <iostream>
-#include <fstream>
 #include <string>
+#include <iomanip>
+#include <fstream>
+#include <sstream>
 #include <vector>
+#include <unordered_map>
+using namespace std;
 
 int main()
 {
-    // Read input.txt into a 2d array of chars
-    std::ifstream input("input.txt");
-    std::vector<std::vector<char>> grid;
-    std::string line;
-    while (std::getline(input, line))
+    string input;
+    ifstream file("input.txt");
+    getline(file, input);
+    vector<vector<char>> grid(8, vector<char>(8, ' '));
+
+    for (size_t i = 0; i < grid[0].size(); ++i)
     {
-        std::vector<char> row;
-        for (char c : line)
+        for (size_t j = 0; j < grid.size(); ++j)
         {
-            row.push_back(c);
+            grid[j][i] = input[i * 8 + j];
         }
-        grid.push_back(row);
     }
 
-    // count the number of times each letter appears in each column
-    std::vector<int> counts(26, 0);
-    for (int i = 0; i < grid[0].size(); i++)
+    for (size_t i = 0; i < grid.size(); ++i)
     {
-        for (int j = 0; j < grid.size(); j++)
+        unordered_map<char, int> freq;
+        for (size_t j = 0; j < grid[0].size(); ++j)
         {
-            counts[grid[j][i] - 'a']++;
+            freq[grid[i][j]]++;
         }
 
-        // find the letter with the most appearances
-        int max = 0;
-        int maxIndex = 0;
-        for (int j = 0; j < counts.size(); j++)
+        char maxChar = ' ';
+        int maxFreq = 0;
+        for (auto &p : freq)
         {
-            if (counts[j] > max)
+            if (p.second > maxFreq)
             {
-                max = counts[j];
-                maxIndex = j;
+                maxChar = p.first;
+                maxFreq = p.second;
             }
         }
 
-        // print the letter
-        std::cout << (char)(maxIndex + 'a');
-
-        // reset the counts
-        for (int j = 0; j < counts.size(); j++)
-        {
-            counts[j] = 0;
-        }
+        cout << maxChar;
     }
-    // prevent auto close
-    std::cin >> line;
     return 0;
 }

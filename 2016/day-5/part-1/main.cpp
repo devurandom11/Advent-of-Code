@@ -71,7 +71,7 @@ auto main() -> int
         if (firstFiveZeros(hex))
             password += hex[5];
         append++;
-        printInLoop(password, hex);
+        // printInLoop(password, hex);
     }
 
     cout << "\033[2J\033[1;1H" << endl; // Clear console
