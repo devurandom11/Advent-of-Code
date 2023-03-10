@@ -1,7 +1,8 @@
+#include <openssl/evp.h>  // OpenSSL library for MD5 implementation
+
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <openssl/evp.h> // OpenSSL library for MD5 implementation
 #include <string>
 
 using namespace std;
@@ -43,7 +44,7 @@ auto main() -> int {
   string temp;
 
   getline(file, input);
-  cout << "\033[2J\033[1;1H"; // Clear console
+  cout << "\033[2J\033[1;1H";  // Clear console
 
   while (password.size() < 8) {
     temp = input + to_string(append);
@@ -57,13 +58,12 @@ auto main() -> int {
     string hex;
     makeHex(result, result_len, hex);
 
-    if (firstFiveZeros(hex))
-      password += hex[5];
+    if (firstFiveZeros(hex)) password += hex[5];
     append++;
     // printInLoop(password, hex);
   }
 
-  cout << "\033[2J\033[1;1H" << endl; // Clear console
+  cout << "\033[2J\033[1;1H" << endl;  // Clear console
   cout << "Password: " << password << endl;
   cout << "Press ENTER to exit..." << endl;
   cin.get();

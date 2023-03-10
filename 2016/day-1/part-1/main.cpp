@@ -5,8 +5,7 @@
 #include <string>
 #include <vector>
 
-auto main() -> int
-{
+auto main() -> int {
   std::ifstream file("input.txt");
   std::string instruction = "";
   std::vector<std::string> instructions = {};
@@ -17,59 +16,40 @@ auto main() -> int
   int steps = 0;
   std::string direction = "";
 
-  while (std::getline(file, instruction, ','))
-  {
+  while (std::getline(file, instruction, ',')) {
     boost::trim(instruction);
     instructions.push_back(instruction);
   }
 
-  for (auto instruction : instructions)
-  {
+  for (auto instruction : instructions) {
     direction = instruction.substr(0, 1);
     steps = std::stoi(instruction.substr(1, instruction.length()));
 
-    if (direction == "R")
-    {
-      if (heading == 'N')
-      {
+    if (direction == "R") {
+      if (heading == 'N') {
         heading = 'E';
         x += steps;
-      }
-      else if (heading == 'E')
-      {
+      } else if (heading == 'E') {
         heading = 'S';
         y -= steps;
-      }
-      else if (heading == 'S')
-      {
+      } else if (heading == 'S') {
         heading = 'W';
         x -= steps;
-      }
-      else if (heading == 'W')
-      {
+      } else if (heading == 'W') {
         heading = 'N';
         y += steps;
       }
-    }
-    else if (direction == "L")
-    {
-      if (heading == 'N')
-      {
+    } else if (direction == "L") {
+      if (heading == 'N') {
         heading = 'W';
         x -= steps;
-      }
-      else if (heading == 'W')
-      {
+      } else if (heading == 'W') {
         heading = 'S';
         y -= steps;
-      }
-      else if (heading == 'S')
-      {
+      } else if (heading == 'S') {
         heading = 'E';
         x += steps;
-      }
-      else if (heading == 'E')
-      {
+      } else if (heading == 'E') {
         heading = 'N';
         y += steps;
       }
